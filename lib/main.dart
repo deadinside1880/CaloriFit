@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './screens/launchscreen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text("Miyuki")
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color.fromRGBO(0, 0, 0, 1)
+      ),
+      home: LaunchScreen()
     );
   }
 }
