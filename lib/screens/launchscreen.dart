@@ -1,3 +1,4 @@
+import 'package:calori_fit/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/CaloriFitTitle.dart';
 import '../styles/Styles.dart';
@@ -25,7 +26,9 @@ class LaunchScreen extends StatelessWidget {
                         const Text("Not your average calorie counting app", style: onboardingText, textAlign: TextAlign.center,),
                         SizedBox(height: MediaQuery.of(context).size.height/10),
                         InkWell(
-                            onTap: () {},
+                            onTap: () => Navigator.of(context).
+                              push(MaterialPageRoute(builder: 
+                              (context) =>  const OnboardingScreen())),
                             child: Container(
                                 padding: const EdgeInsets.symmetric(vertical: 18),
                                 width: double.infinity,
