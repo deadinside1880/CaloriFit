@@ -2,14 +2,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 class CaloriFitTitle extends StatelessWidget {
-  const CaloriFitTitle({super.key});
+  final Color color;
+  const CaloriFitTitle({super.key, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
                             "CaloriFit",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color),
                              );
   }
 }

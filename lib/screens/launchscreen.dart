@@ -21,7 +21,7 @@ class LaunchScreen extends StatelessWidget {
                             flex: 1,
                             child: Container(),
                             ),
-                        const CaloriFitTitle(),
+                        const CaloriFitTitle(color: Colors.white),
                         SizedBox(height: MediaQuery.of(context).size.height/25),
                         const Text("Not your average calorie counting app", style: onboardingText, textAlign: TextAlign.center,),
                         SizedBox(height: MediaQuery.of(context).size.height/10),

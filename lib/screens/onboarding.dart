@@ -1,4 +1,5 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
+import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:calori_fit/styles/Styles.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.width/10),
-                    const CaloriFitTitle(),
+                    const CaloriFitTitle(color: Colors.white),
                     Flexible(flex: 1, child: Container()),
                     const Text("ACTION IS THE", style: onboardingText, textAlign: TextAlign.center),
                     const SizedBox(height: 10),
@@ -51,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 -10),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen())),
                         child: Container(
                           
                           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -67,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontWeight: FontWeight.w500),
                                 textAlign: TextAlign.center
                               ),
-                              Icon(Icons.keyboard_arrow_right, color: Colors.black,)
+                              Icon(Icons.arrow_right_rounded, color: Colors.black,)
                                 ]
                           ),
                         ),
