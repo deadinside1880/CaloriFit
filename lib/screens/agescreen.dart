@@ -17,7 +17,7 @@ class AgeSelectorScreen extends StatefulWidget {
 
 class _AgeSelectorScreenState extends State<AgeSelectorScreen> {
 
-  int _age = 0;
+  int _age = 15;
 
   void updateAge(int age){
     setState(() {
@@ -40,9 +40,10 @@ class _AgeSelectorScreenState extends State<AgeSelectorScreen> {
             const SizedBox(height: 15,),
             const Text("THIS HELPS US CREATE YOUR PERSONALIZED PLAN"),
             const SizedBox(height: 10,),
-            WheelScroller(setAge: (value) => updateAge(value)),
+            WheelScroller(setValue: (value) => updateAge(value), minimum: 15, maximum: 70, lineWidth: 90, text: "",),
             Flexible(flex: 1, child: Container()),
             const InfoSelectionBottom(isGenderScreen: false, nextScreen: WeightSelector()),
+            InkWell( onTap: () => print(_age), child: Container( height: 20, width: 20, color: maingreen,),),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],
         ),
