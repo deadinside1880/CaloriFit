@@ -184,5 +184,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  wheel_chooser:
+    dependency: "direct main"
+    description:
+      name: wheel_chooser
+      sha256: ae15de5f7df01672024f84c0ef571a9527ee0f1ef5971fbafdbe60a5ddc2e66b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
 sdks:
   dart: ">=2.19.2 <3.0.0"

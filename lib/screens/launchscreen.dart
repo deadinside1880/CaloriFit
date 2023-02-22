@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import '../Widgets/CaloriFitTitle.dart';
 import '../styles/Styles.dart';
 
+
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child:Container(
+        body: Container(
                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
                 width: double.infinity,
                 child: Column(
@@ -46,7 +45,7 @@ class LaunchScreen extends StatelessWidget {
                         SizedBox(height: MediaQuery.of(context).size.height/15)
                     ],
                 ),
-            ))
+            )
     );
   }
 }

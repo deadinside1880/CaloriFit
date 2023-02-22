@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import './screens/launchscreen.dart';
+import 'package:flutter/services.dart';
 void main() {
   runApp(MyApp());
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color.fromRGBO(0, 0, 0, 1)
+        scaffoldBackgroundColor: const Color.fromRGBO(28, 16, 24, 1)
       ),
       home: LaunchScreen()
     );

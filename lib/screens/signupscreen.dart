@@ -1,5 +1,7 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/TextInputField.dart';
+import 'package:calori_fit/screens/genderscreen.dart';
+import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/styles/Styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +19,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordAgainController = TextEditingController();
+
+  @override
+  void dispose(){
+    super.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordAgainController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           const Image(image: AssetImage("lib/assets/Background3.png")),
@@ -34,7 +47,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Login"),
+                    InkWell(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const LoginScreen())),
+                      child: const Text("Login")
+                      ),
                     const SizedBox(width: 20,),
                     Column(
                       children: [
@@ -64,7 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GenderScreen())),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                       decoration: buttonShapeDecor,

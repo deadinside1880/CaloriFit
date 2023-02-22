@@ -1,4 +1,5 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
+import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:calori_fit/styles/Styles.dart';
@@ -13,11 +14,13 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  bool isEmailEmpty = true;
+  bool isEmailValid = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
+      body: Container(
           child: Stack(
             children: [
               const Image(image: AssetImage('lib/assets/Background.png')),
@@ -81,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         const Text("Have an account?", style: TextStyle(fontSize: 17),),
                         const SizedBox(width: 5),
                         InkWell(
-                          onTap: () {},
+                          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen())),
                           child: const Text("Log in", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17)),
                         )
                       ],
@@ -93,7 +96,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ],
           ),
         ),
-      )
     );
   }
 }
