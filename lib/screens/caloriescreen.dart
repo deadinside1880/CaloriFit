@@ -5,6 +5,7 @@ import '../Widgets/CaloriFitTitle.dart';
 import '../Widgets/InfoSelectionBottom.dart';
 import '../Widgets/WheelScroller.dart';
 import '../styles/Colors.dart';
+import 'home.dart';
 import 'loginscreen.dart';
 
 class CalorieSelectorScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _CalorieSelectorScreenState extends State<CalorieSelectorScreen> {
             const SizedBox(height: 10,),
             WheelScroller(setValue: (value) => updateCalorieGoal(value), minimum: 1500, maximum: 4000, lineWidth: 200, text: "cal", step: 100,),
             Flexible(flex: 1, child: Container()),
-            const InfoSelectionBottom(isGenderScreen: false, nextScreen: HomeScreen()),
+            const InfoSelectionBottom(isGenderScreen: false, nextScreen: Home()),
             InkWell( onTap: () => print(_calorieGoal), child: Container( height: 20, width: 20, color: maingreen,),),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],
