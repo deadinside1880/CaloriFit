@@ -4,7 +4,7 @@ class MealButton extends StatefulWidget {
   final String meal;
   final int cal;
   final Color color;
-  final Function dosumn;
+  final VoidCallback dosumn;
 
   const MealButton({
     super.key,
@@ -22,7 +22,7 @@ class _MealButtonState extends State<MealButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: widget.dosumn,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
         decoration: BoxDecoration(
