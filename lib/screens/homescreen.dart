@@ -1,3 +1,4 @@
+import 'package:calori_fit/Widgets/AddNewMeal.dart';
 import 'package:calori_fit/Widgets/BarChartWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -119,11 +120,29 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ),
             const SizedBox(height: 20,),
-            Material(child: MealButton(meal: "Breakfast", color: green1, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Breakfast", 
+                color: green1, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green1, meal: "Breakfast")))
+              )
+            ),
             const SizedBox(height: 10,),
-            Material(child: MealButton(meal: "Lunch", color: green2, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Lunch", 
+                color: green2, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green2, meal: "Lunch")))
+              )
+            ),
             const SizedBox(height: 10,),
-            Material(child: MealButton(meal: "Dinner", color: green3, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Dinner", 
+                color: green3, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green3, meal: "Dinner")))
+              )
+            ),
             const SizedBox(height: 10,),
           ],
         ),

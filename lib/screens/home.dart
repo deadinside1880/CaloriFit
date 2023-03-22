@@ -1,11 +1,11 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
-import 'package:calori_fit/Widgets/MealButton.dart';
+import 'package:calori_fit/screens/profilescreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
-import 'package:calori_fit/styles/Styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+
+
+import 'achievementscreen.dart';
+import 'homescreen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,7 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  String photoURL = "";
+  late List<Widget> homescreens;
   int _page = 0;
   late PageController _pageController;
 
@@ -29,11 +30,14 @@ class _HomeState extends State<Home> {
     });
   }
 
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _pageController = PageController();
+    homescreens = [const HomeScreen(), AchievementScreen(photoURL: photoURL), const Text("Notifications"), const ProfileScreen(),];
   }
 
   @override

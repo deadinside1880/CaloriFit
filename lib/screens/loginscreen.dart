@@ -1,5 +1,7 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/TextInputField.dart';
+import 'package:calori_fit/resources/auth.dart';
+import 'package:calori_fit/screens/home.dart';
 import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:calori_fit/styles/Styles.dart';
@@ -26,6 +28,15 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void login() async{
+    AuthMethods amo = AuthMethods();
+    String res = await amo.signInUser(email: _emailController.text, password: _passwordController.text);
+    if(res == 'success'){
+      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
+    }
   }
 
   @override
@@ -121,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 - 5),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: login,
                     child: Container(
                       decoration: buttonShapeDecor,
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),

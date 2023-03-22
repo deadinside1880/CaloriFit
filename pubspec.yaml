@@ -38,6 +38,14 @@ dependencies:
   wheel_chooser: ^1.0.0
   percent_indicator: ^4.2.2
   fl_chart: ^0.61.0
+  flutter_custom_switch: ^0.0.3
+  image_picker: ^0.8.6+4
+  firebase_auth: ^4.3.0
+  cloud_firestore: ^4.4.5
+  firebase_storage: ^11.0.16
+  uuid: ^3.0.7
+  firebase_core: ^2.8.0
+  firebase_ml_model_downloader: ^0.2.0+13
 
 dev_dependencies:
   flutter_test:

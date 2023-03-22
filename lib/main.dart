@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import './screens/launchscreen.dart';
 import 'package:flutter/services.dart';
-void main() {
+void main() async{
   runApp(MyApp());
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {

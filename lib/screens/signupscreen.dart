@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/TextInputField.dart';
 import 'package:calori_fit/screens/genderscreen.dart';
 import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/styles/Styles.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
+import '../resources/auth.dart';
 import '../styles/Colors.dart';
+import '../models/enums.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,6 +23,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _passwordAgainController = TextEditingController();
+  final _imagePicker = ImagePicker();
+  
+  File? profilepic;
+
+  void selectImage() async{
+    XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    if(image!=null){
+      setState(() {
+        profilepic = File(image.path);
+      });
+    }
+  }
 
   @override
   void dispose(){
@@ -27,6 +43,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _passwordAgainController.dispose();
     _passwordController.dispose();
+  }
+
+  void signUpUser() async{
+    AuthMethods amo = AuthMethods();
+    String result = await amo.registerUser(
+      email: _emailController.text,
+      name: _nameController.text,
+      password: _passwordController.text, 
+      age: 0, 
+      weight: 0, 
+      height: 0, 
+      gender: Genders.FEMALE, 
+      calorieGoal: 0, 
+      profilepic: profilepic!
+    ); 
+    if(result == 'success'){  
+      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GenderScreen()));
+    }
   }
 
   @override
@@ -61,9 +96,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Flexible(child: Container(),),
                     Stack(
-                      children: const [
-                        Image(image: AssetImage("lib/assets/DefaultPP.png")),
-                        Icon(Icons.camera_alt_rounded)
+                      clipBehavior: Clip.antiAlias,
+                      children: [
+                        profilepic == null?
+                        const Image(image: AssetImage("lib/assets/DefaultPP.png"))
+                        :
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            //image: ,
+                            borderRadius: BorderRadius.circular(50)
+                          ),
+                          child: Image.file(profilepic!),
+                        ),
+                        IconButton(
+                          onPressed: ()=>  selectImage(),
+                          icon: const Icon(Icons.camera_alt_rounded)
+                        )
                       ],
                     )
                   ],
@@ -80,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4),
                   child: InkWell(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GenderScreen())),
+                    onTap: signUpUser,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                       decoration: buttonShapeDecor,

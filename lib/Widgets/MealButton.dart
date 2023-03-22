@@ -23,6 +23,7 @@ class _MealButtonState extends State<MealButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.dosumn,
+      borderRadius: BorderRadius.circular(48),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
         decoration: BoxDecoration(

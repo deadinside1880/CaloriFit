@@ -1,3 +1,4 @@
+import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatelessWidget {
@@ -5,9 +6,11 @@ class TextInputField extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType tit;
+  final String helperText;
 
   const TextInputField(
       {Key? key,
+      this.helperText = "",
       this.hintText = "",
       this.isPass = false,
       required this.tec,
@@ -19,12 +22,15 @@ class TextInputField extends StatelessWidget {
     final inputBorder =
         OutlineInputBorder(borderSide: Divider.createBorderSide(context));
     return TextField(
+      cursorColor: maingreen,
       controller: tec,
       decoration: InputDecoration(
+        hintStyle: const TextStyle(color: Colors.white),
         hintText: hintText,
-        border: inputBorder,
-        focusedBorder: inputBorder,
-        enabledBorder: inputBorder,
+        //helperText: helperText,
+        //border: inputBorder,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
         filled: false,
         contentPadding: const EdgeInsets.all(8),
       ),
