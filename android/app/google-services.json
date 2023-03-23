@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "85392363501",
+    "project_id": "calorifit-73510",
+    "storage_bucket": "calorifit-73510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85392363501:android:13e994800317a4e5cca1e4",
+        "android_client_info": {
+          "package_name": "com.code_blooded.CaloriFit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85392363501-kp5vkfcmhtcr1v67vii8khc5cvt8ifcp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_e1t2RupoJM6ZuuVNhvmLamv_vFH-kkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85392363501-kp5vkfcmhtcr1v67vii8khc5cvt8ifcp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

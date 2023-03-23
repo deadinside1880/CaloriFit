@@ -1,5 +1,6 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/InfoSelectionBottom.dart';
+import 'package:calori_fit/models/enums.dart';
 import 'package:calori_fit/screens/agescreen.dart';
 import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
@@ -14,6 +15,7 @@ class GenderScreen extends StatefulWidget {
 }
 
 class _GenderScreenState extends State<GenderScreen> {
+  Genders _gender = Genders.FEMALE;
   bool isMaleSelected = false;
   bool isFemaleSelected = false;
   @override
@@ -38,6 +40,7 @@ class _GenderScreenState extends State<GenderScreen> {
               onTap: () => setState(() {
                 isFemaleSelected = false;
                 isMaleSelected = true;
+                _gender = Genders.MALE;
               }),
               child:
                 AnimatedContainer(
@@ -86,7 +89,7 @@ class _GenderScreenState extends State<GenderScreen> {
                 ),
             ),
             Flexible(flex: 1, child: Container()),
-            const InfoSelectionBottom(isGenderScreen: true, nextScreen: AgeSelectorScreen()),
+            InfoSelectionBottom(Screen: 'GENDERSCREEN', nextScreen: const AgeSelectorScreen(), gender: _gender,),
             Flexible(flex: 1, child: Container()),
           ],
         ),

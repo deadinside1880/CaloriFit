@@ -27,7 +27,7 @@ class _WeightSelectorState extends State<WeightSelector> {
            const SizedBox(height: 15,),
            const Text("THIS HELPS US CREATE YOUR PERSONALIZED PLAN"),
            const SizedBox(height: 10,),
-           const InfoSelectionBottom(isGenderScreen: false, nextScreen: HeightSelectorScreen())
+           const InfoSelectionBottom(Screen: "WEIGHTSCREEN", nextScreen: HeightSelectorScreen(), weight: 50,)
         ],
       ),
     );

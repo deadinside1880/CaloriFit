@@ -1,6 +1,9 @@
+import 'package:calori_fit/Widgets/AddNewMeal.dart';
 import 'package:calori_fit/Widgets/BarChartWidget.dart';
+import 'package:calori_fit/resources/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 import '../Widgets/MealButton.dart';
 import '../styles/Colors.dart';
@@ -69,7 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             lineWidth: 13,
                             backgroundColor: const Color(0xFF7F7F7F),
                             progressColor: maingreen,
-                            percent: _consumedCal / _calGoal,
+                            percent: context.watch<Providers>().getUser.meals.fold(0, (sum, meal) => sum+meal.calorieCount) 
+                              / context.watch<Providers>().getUser.calorieGoal,
+                            //percent: _consumedCal / _calGoal,
                             // center: Column(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,11 +124,29 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ),
             const SizedBox(height: 20,),
-            Material(child: MealButton(meal: "Breakfast", color: green1, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Breakfast", 
+                color: green1, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green1, meal: "Breakfast")))
+              )
+            ),
             const SizedBox(height: 10,),
-            Material(child: MealButton(meal: "Lunch", color: green2, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Lunch", 
+                color: green2, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green2, meal: "Lunch")))
+              )
+            ),
             const SizedBox(height: 10,),
-            Material(child: MealButton(meal: "Dinner", color: green3, dosumn: () {})),
+            Material(
+              child: MealButton(
+                meal: "Dinner", 
+                color: green3, 
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green3, meal: "Dinner")))
+              )
+            ),
             const SizedBox(height: 10,),
           ],
         ),

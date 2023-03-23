@@ -1,7 +1,9 @@
+import 'package:calori_fit/resources/providers.dart';
 import 'package:calori_fit/screens/caloriescreen.dart';
 import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Widgets/CaloriFitTitle.dart';
 import '../Widgets/InfoSelectionBottom.dart';
@@ -39,7 +41,7 @@ class _HeightSelectorScreenState extends State<HeightSelectorScreen> {
             const SizedBox(height: 10,),
             WheelScroller(setValue: (value) => updateHeight(value), minimum: 130, maximum: 200, lineWidth: 150, text: "cm",),
             Flexible(flex: 1, child: Container()),
-            const InfoSelectionBottom(isGenderScreen: false, nextScreen: CalorieSelectorScreen()),
+            InfoSelectionBottom(Screen: 'HEIGHTSCREEN', nextScreen: CalorieSelectorScreen(), height: _height,),
             InkWell( onTap: () => print(_height), child: Container( height: 20, width: 20, color: maingreen,),),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],

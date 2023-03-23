@@ -1,11 +1,14 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
-import 'package:calori_fit/Widgets/MealButton.dart';
+import 'package:calori_fit/Widgets/Loader.dart';
+import 'package:calori_fit/resources/providers.dart';
+import 'package:calori_fit/screens/profilescreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
-import 'package:calori_fit/styles/Styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
+
+
+import 'achievementscreen.dart';
+import 'homescreen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,9 +18,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  String photoURL = "";
+  late List<Widget> homescreens;
   int _page = 0;
   late PageController _pageController;
+  bool isLoading = true;
 
   void pageTapped(int page){
     _pageController.jumpToPage(page);
@@ -26,6 +31,19 @@ class _HomeState extends State<Home> {
   void onPageChanged(int page){
     setState(() {
       _page = page;
+    });
+  }
+
+  void setUser(BuildContext context) async{
+    setState(() {
+      isLoading = true;
+    });
+    // Providers _provider = Providers();
+    // await _provider.refreshUser();
+    // print("refreshed user");
+    setState(() {
+      homescreens = [const HomeScreen(), AchievementScreen(photoURL: photoURL), const Text("Notifications"), const ProfileScreen(),];
+      isLoading = false;
     });
   }
 
@@ -43,7 +61,8 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    setUser(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -53,7 +72,8 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         shadowColor: Colors.transparent,
       ),
-      body: PageView(
+      body: isLoading? const Loader() 
+      : PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: homescreens,
