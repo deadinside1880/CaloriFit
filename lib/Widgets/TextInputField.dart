@@ -28,7 +28,7 @@ class TextInputField extends StatelessWidget {
         hintStyle: const TextStyle(color: Colors.white),
         hintText: hintText,
         //helperText: helperText,
-        //border: inputBorder,
+        // border: inputBorder,
         focusedBorder: InputBorder.none,
         enabledBorder: InputBorder.none,
         filled: false,
