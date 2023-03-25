@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     _pageController = PageController();
+    homescreens = [const HomeScreen(), AchievementScreen(photoURL: photoURL), const Text("Notifications"), const ProfileScreen(),];
   }
 
   @override
