@@ -22,11 +22,12 @@ class ProcessingImageScreen extends StatefulWidget {
 class _ProcessingImageScreenState extends State<ProcessingImageScreen> {
 
   late Classifier _classifier;
-  Category? category;
+  String? food;
 
   @override
   void initState(){
     super.initState();
+    runInference();
   }
 
   void runInference()async{
@@ -34,20 +35,23 @@ class _ProcessingImageScreenState extends State<ProcessingImageScreen> {
     _classifier = Classifier();
     await _classifier.loadModel();
     await _classifier.loadLabels();
-    print("done with basic bitch shit");
     var pred = _classifier.predict(imageInput);
     setState(() {
-      category = pred;
+      food = pred;
     });
-    if(category!=null){
-      print(category!.score);
-      print(category!.label);
+    if(context.mounted){
+      Navigator.of(context).push(MaterialPageRoute(
+      builder: (context)=> ResultScreen(
+      image: widget.image,
+      mealType: widget.meal, 
+      food: food==null? "" : food!
+      )
+      ));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    runInference();
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
@@ -74,8 +78,9 @@ class _ProcessingImageScreenState extends State<ProcessingImageScreen> {
               onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(
                 builder: (context)=> ResultScreen(
-                  meal: widget.meal, 
-                  foods: [Meal(MealType.BREAKFAST, 900, "Pizza")]
+                  image: widget.image,
+                  mealType: widget.meal, 
+                  food: food==null? "" : food!
                 )
                 )),
               child: Container(

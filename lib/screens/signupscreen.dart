@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const LoginScreen())),
                       child: const Text("Login")
                       ),
@@ -126,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Flexible(flex: 1, child: Container()),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4),
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: signUpUser,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),

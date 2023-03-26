@@ -1,4 +1,5 @@
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
+import 'package:calori_fit/Widgets/Loader.dart';
 import 'package:calori_fit/Widgets/TextInputField.dart';
 import 'package:calori_fit/resources/auth.dart';
 import 'package:calori_fit/screens/home.dart';
@@ -22,6 +23,13 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isCorrectEmail = true;
   bool isEmailEmpty = true;
   bool obscurePassword = true;
+  bool isLoading = false;
+
+  @override
+  void initState(){
+    super.initState();
+    _emailController.addListener(_onKeyPressed);
+  }
 
   @override
   void dispose(){
@@ -30,12 +38,30 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
   }
 
+  void _onKeyPressed(){
+      setState(() {
+        if(_emailController.text.isEmpty){
+          isEmailEmpty = true;
+        }else{
+          isEmailEmpty = false;
+        }
+        if(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_emailController.text)){
+          isCorrectEmail = true;
+        }else{
+          isCorrectEmail = false;
+        }
+      });
+    }
+
   void login() async{
     AuthMethods amo = AuthMethods();
     String res = await amo.signInUser(email: _emailController.text, password: _passwordController.text);
     if(res == 'success' && context.mounted){
       context.read<Providers>().refreshUser();
-      print("refresged user");
+      setState(() {
+        isLoading = true;
+      });
+      await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
     }
@@ -45,11 +71,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
+      body: isLoading?
+      const Loader()
+      :
+      Stack(
         children: [
           const Image(image: AssetImage("assets/Background3.png")),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -67,13 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     const SizedBox(width: 20,),
-                    InkWell(
+                    GestureDetector(
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpScreen())),
                       child: const Text("Sign Up")
                       )
                   ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height/10,),
+                const SizedBox(height: 10,),
                 const Text("Welcome back", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Colors.white),),
                 const SizedBox(height: 20,),
                 const Text("Log in to your account", style: TextStyle(fontSize: 20, color: Colors.white),),
@@ -84,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextInputField(tec: _emailController, tit: TextInputType.emailAddress),
                     Visibility(
-                      visible: isCorrectEmail,
+                      visible: isCorrectEmail && !isEmailEmpty,
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         height: 30,
@@ -107,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   children: [
                     TextInputField(tec: _passwordController, tit: TextInputType.text, isPass: obscurePassword,),
-                    InkWell(
+                    GestureDetector(
                       onTap: () => setState(() {
                         obscurePassword = !obscurePassword;
                       }),
@@ -125,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: double.infinity,
                   alignment: Alignment.centerRight,
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () {},
                     child: const Text("Forgot Password", style: TextStyle(color: maingreen),),
                   )
@@ -133,12 +162,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Flexible(flex: 1, child: Container()),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 - 5),
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: login,
                     child: Container(
                       decoration: buttonShapeDecor,
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                            Text("Login", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),),
                            Icon(Icons.arrow_right_rounded, color: Colors.black,)

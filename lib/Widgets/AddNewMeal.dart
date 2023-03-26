@@ -48,7 +48,6 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: backgroundcolor,
-        title: const CaloriFitTitle(color: Colors.white),
         centerTitle: true,
         shadowColor: Colors.transparent,
       ),
@@ -72,8 +71,7 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
             const SizedBox(height: 10,),
             Material(
               borderRadius: BorderRadius.circular(5),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(5),
+              child: GestureDetector(
                 onTap: () => selectImage(),
                 child: Container(
                   width: MediaQuery.of(context).size.width*0.7,

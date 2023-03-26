@@ -2,6 +2,7 @@ import 'package:calori_fit/models/enums.dart';
 import 'package:calori_fit/resources/auth.dart';
 import 'package:flutter/material.dart';
 
+import '../models/Meal.dart';
 import '../models/User.dart';
 
 class Providers extends ChangeNotifier{
@@ -50,11 +51,14 @@ class Providers extends ChangeNotifier{
     notifyListeners();
   }
 
+  void addMeal(Meal meal){
+    _user!.meals.add(meal);
+    notifyListeners();
+  }
+
   Future<void> refreshUser() async{
     User user = await _amo.getUserDetails();
     _user = user;
-    print("this is user from provider");
-    print(_user!.age);
     notifyListeners();
   }
 }

@@ -38,9 +38,6 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    // Providers _provider = Providers();
-    // await _provider.refreshUser();
-    // print("refreshed user");
     setState(() {
       homescreens = [const HomeScreen(), const AchievementScreen(), const ProfileScreen(),];
       isLoading = false;
@@ -69,7 +66,6 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: backgroundcolor,
-        title: const CaloriFitTitle(color: Colors.white),
         centerTitle: true,
         shadowColor: Colors.transparent,
       ),

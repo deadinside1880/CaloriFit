@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         case MealType.LUNCH : {lunch = meal;} break;
         case MealType.DINNER : {dinner = meal;} break;
       }
+      print(meal.calorieCount);
     }
   }
 
@@ -40,8 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     int todaysCals = context.watch<Providers>().getUser.meals.fold(0, (sum, meal) => sum+meal.calorieCount);
     setMeals();
     print(DateTime.now());
-    print(todaysCals);
-    print(context.watch<Providers>().getUser.calorieGoal);
     return Container(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
         child: Column(

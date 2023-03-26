@@ -6,15 +6,22 @@ class Meal{
   int calorieCount;
   String meal;
 
-  Meal(this.mealType, this.calorieCount, this.meal);
+  Meal({required this.mealType, required this.calorieCount, required this.meal});
+
+  Map<String, dynamic> toJSON()=>{
+    'mealType': mealType==MealType.BREAKFAST? "BREAKFAST" : mealType==MealType.LUNCH? "LUNCH" : "DINNER",
+    'calorieCount' : calorieCount,
+    'meal' : meal
+  };
 
   static List<Meal> modelFromSnap(meals){
     print(meals);
-    print(meals[0]);
-    return 
-    meals.map((thismeal) =>Meal(
-      thismeal.mealType == 'BREAKFAST' ? MealType.BREAKFAST : thismeal.mealType == 'LUNCH' ? MealType.LUNCH : MealType.DINNER, 
-      thismeal.calorieCount, 
-      thismeal.meal)).toList();
+    List<Meal> usermeals = meals.map((thismeal) =>Meal(
+      mealType: thismeal["mealType"] == 'BREAKFAST' ? MealType.BREAKFAST : thismeal["mealType"] == 'LUNCH' ? MealType.LUNCH : MealType.DINNER, 
+      calorieCount: thismeal["calorieCount"], 
+      meal: thismeal["meal"])).toList();
+    print(usermeals);
+    List<Meal> temp = [];
+    return [];
   }
 }

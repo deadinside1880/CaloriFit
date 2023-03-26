@@ -43,7 +43,6 @@ class _CalorieSelectorScreenState extends State<CalorieSelectorScreen> {
             WheelScroller(setValue: (value) => updateCalorieGoal(value), minimum: 1500, maximum: 4000, lineWidth: 200, text: "cal", step: 100,),
             Flexible(flex: 1, child: Container()),
             InfoSelectionBottom(Screen: "CALORIESCREEN", nextScreen: Home(), calorieGoal: _calorieGoal,),
-            InkWell( onTap: () => print(_calorieGoal), child: Container( height: 20, width: 20, color: maingreen,),),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],
         ),

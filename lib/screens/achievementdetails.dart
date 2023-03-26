@@ -22,7 +22,7 @@ class AchievementDetails extends StatelessWidget {
             Row( 
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                InkWell(
+                GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Container(
                     height: 40,
@@ -45,17 +45,18 @@ class AchievementDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10,),
-            Text(achievement.title, style: const TextStyle(),),
+            Text(achievement.title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
             SizedBox(height: MediaQuery.of(context).size.height/10,),
             CircleAvatar(
-              backgroundImage: AssetImage(achievement.photoURL),
+              backgroundImage: NetworkImage(achievement.photoURL),
               radius: 150,
             ),
             SizedBox(height: MediaQuery.of(context).size.height/10,),
-            const Text("CONGRATULATIONS"),
+            const Text("CONGRATULATIONS!!!"),
             const SizedBox(height: 10,),
-            const Text("You have completed this achievement. We are very proud of you for coming this far. We hope you continue your journey to glpry with us",
-             style: TextStyle(),),
+            const Text("You have completed this achievement! We are very proud of you for coming this far! We hope you continue your journey to glory with us!",
+             style: TextStyle(),
+             textAlign: TextAlign.center,),
           ],
         ),
       ),

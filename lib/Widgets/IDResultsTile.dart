@@ -7,10 +7,8 @@ class IDResultsTile extends StatelessWidget {
     required this.meal, 
     required this.isLastOption,
     required this.cals,
-    required this.index
   });
 
-  final int index;
   final String meal;
   final isLastOption;
   final int cals;
@@ -36,9 +34,9 @@ class IDResultsTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children:[
-            Text("$index. $meal", style: const TextStyle(fontSize: 18),),
+            Text(meal, style: const TextStyle(fontSize: 18),),
             Flexible(child: Container()),
-            Text("$cals Kcal/100gm", style: const TextStyle(fontSize: 18),)
+            Text("$cals cal/serving", style: const TextStyle(fontSize: 18),)
           ],
         ),
       ),

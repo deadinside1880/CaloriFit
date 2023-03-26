@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     getName();
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.08),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.center,
                 children: [
                   const CustomPaint(
-                    size: Size(100,100),
+                    size: Size(130,130),
                     painter: GradientArcPainter(
                       progress: 0.75, 
                       startColor: maingreen, 
@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   CircleAvatar(
                     backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),
-                    radius: 60,
+                    radius: 50,
                     ),
                 ],
               ),

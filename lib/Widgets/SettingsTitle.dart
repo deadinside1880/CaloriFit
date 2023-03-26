@@ -1,9 +1,10 @@
+import 'package:calori_fit/screens/home.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
 class SettingsTitle extends StatelessWidget {
-  const SettingsTitle({super.key, required this.text});
-
+  const SettingsTitle({super.key, required this.text, this.isResultScreen = false});
+  final bool isResultScreen;
   final String text;
 
   @override
@@ -11,8 +12,14 @@ class SettingsTitle extends StatelessWidget {
     return Row( 
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        InkWell(
-          onTap: () => Navigator.pop(context),
+        GestureDetector(
+          onTap: () {
+            if(isResultScreen){
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
+            }else{
+              Navigator.of(context).pop();
+            }
+          },
           child: Container(
             height: 40,
             width: 40,

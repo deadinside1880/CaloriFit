@@ -35,7 +35,7 @@ class InfoSelectionBottom extends StatelessWidget {
                 children: [
                   Screen == 'GENDERSCREEN'? 
                   Container():
-                  InkWell(
+                  GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
                       alignment: Alignment.center,
@@ -50,7 +50,7 @@ class InfoSelectionBottom extends StatelessWidget {
                   ),
                   Flexible(child: Container()),
 
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       switch(Screen){
                         case 'GENDERSCREEN':{context.read<Providers>().setGender = gender;}

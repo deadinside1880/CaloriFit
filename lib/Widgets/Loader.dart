@@ -12,7 +12,7 @@ class Loader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network("https://media.tenor.com/F4oqZzepy5UAAAAC/bluefire.gif"),
+          Image.asset("assets/loading-gif.gif"),
           Text("Burning Calories")
         ],
       )

@@ -46,7 +46,7 @@ class User{
     'email' : email,
     'photoURL' : photoURL,
     'height' : height,
-    'meals' : meals,
+    'meals' : meals.map((meal) => meal.toJSON()).toList(),
     'weeklyCalories' : weeklyCalories,
     'currentStreak' : currentStreak,
     'highestStreak' : highestStreak

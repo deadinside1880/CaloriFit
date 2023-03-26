@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => Providers())],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: const Color.fromRGBO(28, 16, 24, 1)
         ),
-        home: LaunchScreen()
+        home: const LaunchScreen()
       ),
     );
   }

@@ -36,7 +36,7 @@ class _GenderScreenState extends State<GenderScreen> {
             const SizedBox(height: 10,),
             const Text("TO KNOW YOUR GENDER"),
             SizedBox(height:MediaQuery.of(context).size.height/15,),
-            InkWell(
+            GestureDetector(
               onTap: () => setState(() {
                 isFemaleSelected = false;
                 isMaleSelected = true;
@@ -63,7 +63,7 @@ class _GenderScreenState extends State<GenderScreen> {
                 ),
             ),
             const SizedBox(height: 50,),
-            InkWell(
+            GestureDetector(
               onTap: () => setState(() {
                 isMaleSelected = false;
                 isFemaleSelected = true;

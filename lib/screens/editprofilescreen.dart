@@ -69,7 +69,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CaloriFitTitle(color: Colors.white),
             SizedBox(height: MediaQuery.of(context).size.height/40,),
             const SettingsTitle(text: "EDIT PROFILE"),
             SizedBox(height: MediaQuery.of(context).size.height/20,),

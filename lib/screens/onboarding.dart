@@ -70,7 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     SizedBox(height: MediaQuery.of(context).size.height/15),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 -10),
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () {
                           if(state){
                             Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen()));
@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         const Text("Have an account?", style: TextStyle(fontSize: 17),),
                         const SizedBox(width: 5),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             if(state){
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen()));

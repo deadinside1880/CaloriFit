@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:image/image.dart';
@@ -18,7 +19,7 @@ class Classifier {
   late TfLiteType _inputType;
   late TfLiteType _outputType;
 
-  final String _labelsFileName = 'assets/labels.txt';
+  final String _labelsFileName = 'assets/labels2.txt';
 
   final int _labelsLength = 2023;
 
@@ -28,8 +29,8 @@ class Classifier {
 
   String get modelName => "MLmodel.tflite";
 
-  NormalizeOp get preProcessNormalizeOp => NormalizeOp(127.5, 127.5);
-  NormalizeOp get postProcessNormalizeOp => NormalizeOp(0, 1);
+  NormalizeOp get preProcessNormalizeOp => NormalizeOp(0, 1);
+  NormalizeOp get postProcessNormalizeOp => NormalizeOp(0, 255);
 
   Classifier({int? numThreads}) {
     _interpreterOptions = InterpreterOptions();
@@ -70,7 +71,7 @@ class Classifier {
     }
   }
 
-  TensorImage _preProcess(TensorImage _inputImage) {
+  TensorImage _preProcess() {
     int cropSize = min(_inputImage.height, _inputImage.width);
     return ImageProcessorBuilder()
         .add(ResizeWithCropOrPadOp(cropSize, cropSize))
@@ -81,13 +82,14 @@ class Classifier {
         .process(_inputImage);
   }
 
-  Category predict(Image image) {
+  String predict(Image image) {
+    String food = "";
     final pres = DateTime.now().millisecondsSinceEpoch;
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
     // _inputImage.LoadImage(Image.from(other))
     // print(pres);
-    _inputImage = _preProcess(_inputImage);
+    _inputImage = _preProcess();
 
     final pre = DateTime.now().millisecondsSinceEpoch - pres;
 
@@ -100,17 +102,9 @@ class Classifier {
     print('Time to run inference: $run ms');
     var el = _outputBuffer.getDoubleList().reduce(max);
     int idx = _outputBuffer.getDoubleList().indexOf(el);
-    print(idx);
-    // _outputBuffer.resize([2023]);
-    // print(labels.shape);
-    print(labels[idx]);
-    TensorLabel a = TensorLabel.fromList(labels, _probabilityProcessor.process(_outputBuffer));
-    print(a);
-    Map<String, double> labeledProb = a.getMapWithFloatValue();
-    print('yes  yes yes ');
-    final pred = getTopProbability(labeledProb);
+    food = labels[idx-1];
+    return food;
 
-    return Category(pred.key, pred.value);
   }
 
   void close() {

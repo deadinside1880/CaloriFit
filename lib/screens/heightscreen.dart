@@ -42,7 +42,6 @@ class _HeightSelectorScreenState extends State<HeightSelectorScreen> {
             WheelScroller(setValue: (value) => updateHeight(value), minimum: 130, maximum: 200, lineWidth: 150, text: "cm",),
             Flexible(flex: 1, child: Container()),
             InfoSelectionBottom(Screen: 'HEIGHTSCREEN', nextScreen: CalorieSelectorScreen(), height: _height,),
-            InkWell( onTap: () => print(_height), child: Container( height: 20, width: 20, color: maingreen,),),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],
         ),
