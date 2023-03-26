@@ -17,7 +17,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
 
-  Image image = const Image(image: AssetImage('lib/assets/Background.png'));
+  Image image = const Image(image: AssetImage('assets/Background.png'));
   bool state = false;
 
   @override
@@ -77,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           }else{
                             setState(() {
                               state = true;
-                              image = const Image(image: AssetImage('lib/assets/Background2.png'));
+                              image = const Image(image: AssetImage('assets/Background2.png'));
                               return;
                             });
                           }

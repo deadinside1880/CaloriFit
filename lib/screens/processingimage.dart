@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:calori_fit/resources/classifier.dart';
+import 'package:image/image.dart' as img;
 import 'package:calori_fit/Widgets/SettingsTitle.dart';
 import 'package:calori_fit/models/Meal.dart';
 import 'package:calori_fit/models/enums.dart';
@@ -8,6 +9,7 @@ import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class ProcessingImageScreen extends StatefulWidget {
   const ProcessingImageScreen({super.key, required this.image, required this.meal});
@@ -18,8 +20,34 @@ class ProcessingImageScreen extends StatefulWidget {
 }
 
 class _ProcessingImageScreenState extends State<ProcessingImageScreen> {
+
+  late Classifier _classifier;
+  Category? category;
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  void runInference()async{
+    img.Image imageInput = img.decodeImage(widget.image.readAsBytesSync())!;
+    _classifier = Classifier();
+    await _classifier.loadModel();
+    await _classifier.loadLabels();
+    print("done with basic bitch shit");
+    var pred = _classifier.predict(imageInput);
+    setState(() {
+      category = pred;
+    });
+    if(category!=null){
+      print(category!.score);
+      print(category!.label);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    runInference();
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),

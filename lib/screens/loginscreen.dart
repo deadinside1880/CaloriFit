@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const Image(image: AssetImage("lib/assets/Background3.png")),
+          const Image(image: AssetImage("assets/Background3.png")),
           Container(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
             child: Column(

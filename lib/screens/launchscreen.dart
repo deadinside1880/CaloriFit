@@ -20,7 +20,7 @@ class LaunchScreen extends StatelessWidget {
                             flex: 1,
                             child: Container(),
                             ),
-                        Image.asset("lib/assets/Logo.png"),
+                        Image.asset("assets/Logo.png"),
                         SizedBox(height: MediaQuery.of(context).size.height/10,),
                         const CaloriFitTitle(color: Colors.white),
                         SizedBox(height: MediaQuery.of(context).size.height/25),

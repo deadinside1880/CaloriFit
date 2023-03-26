@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const Image(image: AssetImage("lib/assets/Background3.png")),
+          const Image(image: AssetImage("assets/Background3.png")),
           Container(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
             child: Column(
@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       clipBehavior: Clip.antiAlias,
                       children: [
                         profilepic == null?
-                        const Image(image: AssetImage("lib/assets/DefaultPP.png"))
+                        const Image(image: AssetImage("assets/DefaultPP.png"))
                         :
                         CircleAvatar(
                           backgroundImage: FileImage(profilepic!),
