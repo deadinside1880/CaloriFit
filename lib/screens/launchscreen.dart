@@ -20,6 +20,8 @@ class LaunchScreen extends StatelessWidget {
                             flex: 1,
                             child: Container(),
                             ),
+                        Image.asset("lib/assets/Logo.png"),
+                        SizedBox(height: MediaQuery.of(context).size.height/10,),
                         const CaloriFitTitle(color: Colors.white),
                         SizedBox(height: MediaQuery.of(context).size.height/25),
                         const Text("Not your average calorie counting app", style: onboardingText, textAlign: TextAlign.center,),

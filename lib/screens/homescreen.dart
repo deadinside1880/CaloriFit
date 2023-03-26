@@ -1,11 +1,13 @@
 import 'package:calori_fit/Widgets/AddNewMeal.dart';
 import 'package:calori_fit/Widgets/BarChartWidget.dart';
+import 'package:calori_fit/models/enums.dart';
 import 'package:calori_fit/resources/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 import '../Widgets/MealButton.dart';
+import '../models/Meal.dart';
 import '../styles/Colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,11 +20,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   bool _isfirstWidget = true;
-  int _consumedCal = 680;
-  int _calGoal = 2400;
+  Meal? breakfast;
+  Meal? lunch;
+  Meal? dinner;
+
+  setMeals(){
+    List<Meal> meals = context.read<Providers>().getUser.meals;
+    for(Meal meal in meals){
+      switch(meal.mealType){
+        case MealType.BREAKFAST : {breakfast = meal;} break;
+        case MealType.LUNCH : {lunch = meal;} break;
+        case MealType.DINNER : {dinner = meal;} break;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    int todaysCals = context.watch<Providers>().getUser.meals.fold(0, (sum, meal) => sum+meal.calorieCount);
+    setMeals();
+    print(DateTime.now());
+    print(todaysCals);
+    print(context.watch<Providers>().getUser.calorieGoal);
     return Container(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
         child: Column(
@@ -72,17 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             lineWidth: 13,
                             backgroundColor: const Color(0xFF7F7F7F),
                             progressColor: maingreen,
-                            percent: context.watch<Providers>().getUser.meals.fold(0, (sum, meal) => sum+meal.calorieCount) 
-                              / context.watch<Providers>().getUser.calorieGoal,
-                            //percent: _consumedCal / _calGoal,
-                            // center: Column(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   crossAxisAlignment: CrossAxisAlignment.center,
-                            //   children: const[
-                            //     Text("Today", style: TextStyle(fontSize: 25),),
-                            //     FittedBox(child: Text("680 cal", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),))
-                            //   ],
-                            // ),
+                            percent: context.watch<Providers>().getUser.calorieGoal==0? 0: todaysCals / context.watch<Providers>().getUser.calorieGoal,
                             circularStrokeCap: CircularStrokeCap.round,
                             animation: true,
                             animationDuration: 500,
@@ -90,15 +99,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const[
-                                Text("Today", style: TextStyle(fontSize: 18, color: Color.fromRGBO(255, 255, 255, 0.6)),),
-                                FittedBox(child: Text("680 cal", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),))
+                              children:[
+                                const Text("Today", style: TextStyle(fontSize: 18, color: Color.fromRGBO(255, 255, 255, 0.6)),),
+                                FittedBox(child: Text("$todaysCals cal", style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w600),))
                               ],
                             ),
                         ],
                       )
                       :
-                      const BarChartWidget()
+                      BarChartWidget(weeklyCalories: context.read<Providers>().getUser.weeklyCalories)
                     ),
                   ),
                   const SizedBox(height: 10,),
@@ -126,25 +135,31 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 20,),
             Material(
               child: MealButton(
+                cal: breakfast== null? 0: breakfast!.calorieCount,
                 meal: "Breakfast", 
                 color: green1, 
-                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green1, meal: "Breakfast")))
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const AddNewMealWidget(color: green1, meal: "Breakfast")))
               )
             ),
             const SizedBox(height: 10,),
             Material(
               child: MealButton(
+                cal: lunch== null? 0: lunch!.calorieCount,
                 meal: "Lunch", 
                 color: green2, 
-                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green2, meal: "Lunch")))
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const AddNewMealWidget(color: green2, meal: "Lunch")))
               )
             ),
             const SizedBox(height: 10,),
             Material(
               child: MealButton(
+                cal: dinner== null? 0: dinner!.calorieCount,
                 meal: "Dinner", 
                 color: green3, 
-                dosumn: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddNewMealWidget(color: green3, meal: "Dinner")))
+                dosumn: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const AddNewMealWidget(color: green3, meal: "Dinner")))
               )
             ),
             const SizedBox(height: 10,),

@@ -8,6 +8,9 @@ import 'package:calori_fit/screens/onboarding.dart';
 import 'package:calori_fit/screens/privacypolicyscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../resources/providers.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,8 +21,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  final String _firstName = "SARAH";
-  final String _lastName = "WEGAN";
+  String _firstName = "SARAH";
+  String _lastName = "WEGAN";
 
   void signOut(){
     AuthMethods amo = AuthMethods();
@@ -28,8 +31,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.of(context).pop();
   }
 
+  void getName(){
+    String fullname = context.read<Providers>().getUser.name;
+    int idx = fullname.indexOf(" ");
+    setState(() {
+      if(idx>0){
+        _firstName = fullname.substring(0,idx);
+        _lastName = fullname.substring(idx+1);
+      }else{
+        _firstName = fullname;
+        _lastName = "";
+      }
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
+    getName();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
       child: Column(
@@ -41,8 +60,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Stack(
                 alignment: Alignment.center,
-                children: const [
-                  CustomPaint(
+                children: [
+                  const CustomPaint(
                     size: Size(100,100),
                     painter: GradientArcPainter(
                       progress: 0.75, 
@@ -51,7 +70,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 5
                     )
                   ),
-                  Icon(Icons.person, size: 50,)
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),
+                    radius: 60,
+                    ),
                 ],
               ),
               Container(

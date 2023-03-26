@@ -104,14 +104,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         profilepic == null?
                         const Image(image: AssetImage("lib/assets/DefaultPP.png"))
                         :
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            //image: ,
-                            borderRadius: BorderRadius.circular(50)
-                          ),
-                          child: Image.file(profilepic!),
+                        CircleAvatar(
+                          backgroundImage: FileImage(profilepic!),
                         ),
                         IconButton(
                           onPressed: ()=>  selectImage(),

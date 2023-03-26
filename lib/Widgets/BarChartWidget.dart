@@ -3,13 +3,37 @@ import 'package:fl_chart/fl_chart.dart';
 import '../styles/Colors.dart';
 
 class BarChartWidget extends StatefulWidget {
-  const BarChartWidget({super.key});
+  final List<int> weeklyCalories;
+  const BarChartWidget({super.key, required this.weeklyCalories});
 
   @override
   State<BarChartWidget> createState() => _BarChartWidgetState();
 }
 
 class _BarChartWidgetState extends State<BarChartWidget> {
+
+  List<BarChartGroupData> _barGroups = [];
+  void setData(){
+    while(widget.weeklyCalories.length < 7){
+      setState(() {
+        widget.weeklyCalories.add(0);
+      });
+    }
+    setState(() {
+      _barGroups = widget.weeklyCalories
+      .asMap().entries.map((entry) => 
+      BarChartGroupData(
+        x: entry.key, 
+        barRods: [
+          BarChartRodData(
+            toY: entry.value.toDouble(), 
+            gradient: _barsGradient
+            ),
+          ], 
+        showingTooltipIndicators: [0]))
+      .toList();
+    });
+  }
 
    LinearGradient get _barsGradient => const LinearGradient(
         colors: [
@@ -21,6 +45,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
       );
 
   List<BarChartGroupData> get barGroups => [
+
         BarChartGroupData(
           x: 0,
           barRods: [
@@ -177,6 +202,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    setData();
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -207,7 +233,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                 barTouchData: _barTouchData,
                 gridData: FlGridData(show: false),
                 borderData: FlBorderData( show: false),
-                barGroups: barGroups,
+                barGroups: _barGroups,
                 titlesData: titlesData
               )
             ),

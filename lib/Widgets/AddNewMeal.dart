@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/MealButton.dart';
 import 'package:calori_fit/Widgets/SettingsTitle.dart';
+import 'package:calori_fit/screens/processingimage.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,6 +35,9 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
       setState(() {
         image = File(im.path);
       });
+      if(context.mounted){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProcessingImageScreen(image: image!, meal: widget.meal,)));
+      }
     }
   }
 
@@ -55,7 +59,7 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
           children: [
             const SettingsTitle(text: "Add New Meal"),
             const SizedBox(height: 30,),
-            Material(child: MealButton(meal: widget.meal, color: widget.color, dosumn: (){})),
+            Material(child: MealButton(meal: widget.meal, color: widget.color, dosumn: (){}, cal: 0,)),
             const SizedBox(height: 15,),
             image==null? 
             const Image(image: NetworkImage("https://images7.alphacoders.com/129/1297416.png"))

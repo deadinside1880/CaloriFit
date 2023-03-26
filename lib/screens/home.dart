@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     // await _provider.refreshUser();
     // print("refreshed user");
     setState(() {
-      homescreens = [const HomeScreen(), AchievementScreen(photoURL: photoURL), const Text("Notifications"), const ProfileScreen(),];
+      homescreens = [const HomeScreen(), const AchievementScreen(), const ProfileScreen(),];
       isLoading = false;
     });
   }
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     _pageController = PageController();
-    homescreens = [const HomeScreen(), AchievementScreen(photoURL: photoURL), const Text("Notifications"), const ProfileScreen(),];
+    homescreens = [const HomeScreen(), const AchievementScreen(), const ProfileScreen(),];
   }
 
   @override
@@ -94,13 +94,8 @@ class _HomeState extends State<Home> {
             ), 
             label: ''),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications, 
-            color: _page == 2? Colors.white : const Color(0xFF505050),
-            ), 
-            label: ''),
-          BottomNavigationBarItem(
             icon: Icon(Icons.person, 
-            color: _page == 3? Colors.white : const Color(0xFF505050),
+            color: _page == 2? Colors.white : const Color(0xFF505050),
             ), 
             label: ''),
         ],

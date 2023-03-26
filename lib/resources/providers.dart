@@ -35,6 +35,21 @@ class Providers extends ChangeNotifier{
     notifyListeners();
   }
 
+  set setPhotoURL(String photoURL){
+    _user!.photoURL = photoURL;
+    notifyListeners();
+  }
+
+  set setName(String name){
+    _user!.name = name;
+    notifyListeners();
+  }
+
+  set setEmail(String email){
+    _user!.email = email;
+    notifyListeners();
+  }
+
   Future<void> refreshUser() async{
     User user = await _amo.getUserDetails();
     _user = user;

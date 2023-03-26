@@ -17,13 +17,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
 
+  Image image = const Image(image: AssetImage('lib/assets/Background.png'));
+  bool state = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
           child: Stack(
             children: [
-              const Image(image: AssetImage('lib/assets/Background.png')),
+              AnimatedSwitcher(
+                duration: const Duration(seconds: 5),
+                child: image
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
                 width: double.infinity,
@@ -46,16 +52,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(color: maingreen,width: 40,height: 5,),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          color: state? const Color.fromRGBO(58, 58, 60, 1): maingreen,
+                          width: state? 20 : 40,
+                          height: 5,
+                        ),
                         const SizedBox(width: 10),
-                        Container(color: const Color.fromRGBO(58, 58, 60, 1), width: 20,height: 5,)
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          color: state? maingreen: const Color.fromRGBO(58, 58, 60, 1), 
+                          width: state? 40 : 20,
+                          height: 5,
+                        )
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height/15),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 -10),
                       child: InkWell(
-                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen())),
+                        onTap: () {
+                          if(state){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen()));
+                          }else{
+                            setState(() {
+                              state = true;
+                              image = const Image(image: AssetImage('lib/assets/Background2.png'));
+                              return;
+                            });
+                          }
+                        },
                         child: Container(
                           
                           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -84,7 +110,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         const Text("Have an account?", style: TextStyle(fontSize: 17),),
                         const SizedBox(width: 5),
                         InkWell(
-                          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen())),
+                          onTap: () {
+                            if(state){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+                            }
+                          },
                           child: const Text("Log in", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17)),
                         )
                       ],

@@ -27,4 +27,17 @@ class FireStore{
     return imgURL;
   }
 
+  Future<String> deleteImage({required String uid}) async{
+    String res = "IDEK";
+    try{
+      final imgRef = _storeRef.child("images").child(_auth.currentUser!.uid);
+      await imgRef.delete();
+    } on FirebaseException catch(err){
+      print(err.code);
+    } catch (e){
+      print(e);
+    }
+    return res;
+  }
+
 }

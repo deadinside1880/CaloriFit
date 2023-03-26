@@ -42,7 +42,9 @@ class AuthMethods{
         photoURL: photoURL, 
         height: height, 
         meals: [], 
-        weeklyCalories: []
+        weeklyCalories: [],
+        currentStreak: 0,
+        highestStreak: 0
       );
 
       CollectionReference userRef = _fireStore.collection("users");

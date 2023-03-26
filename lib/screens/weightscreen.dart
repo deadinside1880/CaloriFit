@@ -23,7 +23,7 @@ class _WeightSelectorState extends State<WeightSelector> {
            SizedBox(height: MediaQuery.of(context).size.height/10,),
            const CaloriFitTitle(color: Colors.white),
            SizedBox(height: MediaQuery.of(context).size.height/10,),
-           const Text("HOW OLD ARE YOU?", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
+           const Text("WHAT'S YOUR WEIGHT?", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
            const SizedBox(height: 15,),
            const Text("THIS HELPS US CREATE YOUR PERSONALIZED PLAN"),
            const SizedBox(height: 10,),

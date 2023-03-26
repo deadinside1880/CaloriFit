@@ -7,16 +7,18 @@ import 'enums.dart';
 
 class User{
   String uid;
-  final String name;
+  String name;
   Genders gender;
   int age;
   int weight;
   int calorieGoal;
-  final String email;
+  String email;
   String photoURL;
   int height;
   List<Meal> meals;
   List<int> weeklyCalories;
+  int currentStreak;
+  int highestStreak;
 
   User({
     required this.uid,
@@ -29,7 +31,9 @@ class User{
     required this.photoURL, 
     required this.height, 
     required this.meals,
-    required this.weeklyCalories
+    required this.weeklyCalories,
+    required this.currentStreak,
+    required this.highestStreak
   });
 
   Map<String,dynamic> toJSON() =>{
@@ -43,7 +47,9 @@ class User{
     'photoURL' : photoURL,
     'height' : height,
     'meals' : meals,
-    'weeklyCalories' : weeklyCalories
+    'weeklyCalories' : weeklyCalories,
+    'currentStreak' : currentStreak,
+    'highestStreak' : highestStreak
   };
 
   static User modelFromSnap(DocumentSnapshot snap){
@@ -59,9 +65,9 @@ class User{
     photoURL : snapshot['photoURL'],
     height : snapshot['height'],
     meals : snapshot['meals'].isEmpty? [] : Meal.modelFromSnap(snapshot['meals']),
-    weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : snapshot['weeklyCalories'].map((calories) => calories as int).toList()
+    weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : snapshot['weeklyCalories'].map((calories) => calories as int).toList(),
+    currentStreak: snapshot['currentStreak'].toInt(),
+    highestStreak: snapshot['highestStreak'].toInt()
     );
   }
-
-
 }

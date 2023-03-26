@@ -1,8 +1,16 @@
+import 'dart:io';
+
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
+import 'package:calori_fit/Widgets/Loader.dart';
 import 'package:calori_fit/Widgets/SettingsTitle.dart';
 import 'package:calori_fit/Widgets/TextInputField.dart';
+import 'package:calori_fit/resources/auth.dart';
+import 'package:calori_fit/resources/store.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
+import '../resources/providers.dart';
 import '../styles/Colors.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -14,8 +22,42 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
 
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final _imagePicker = ImagePicker();
+
+  File? profilepic;
+  bool isLoading = false;
+
+  void selectImage() async{
+    XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    if(image!=null){
+      setState(() {
+        profilepic = File(image.path);
+      });
+    }
+  }
+
+  void update() async{
+    setState(() {
+      isLoading = true;
+    });
+    FireStore _fso = FireStore();
+    AuthMethods _amo = AuthMethods();
+    _fso.deleteImage(uid: context.read<Providers>().getUser.uid);
+    String photoURL = await _fso.uploadImage(image: profilepic!, typeOfImage: "profilepic");
+    if(context.mounted){
+      context.read<Providers>().setPhotoURL = photoURL;
+      context.read<Providers>().setEmail = _emailController.text;
+      context.read<Providers>().setName = _nameController.text;
+      _amo.updateUser(context.read<Providers>().getUser);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  } 
+    
+  
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +65,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20, vertical: MediaQuery.of(context).size.height/40),
-        child: Column(
+        child: isLoading? const Loader() : 
+        Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const CaloriFitTitle(color: Colors.white),
@@ -33,9 +76,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Stack(
               clipBehavior: Clip.none,
               children:[
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 64,
-                  backgroundImage: NetworkImage("https://cdn.anime-planet.com/characters/primary/mahiru-shiina-1-285x399.webp?t=1674248740")
+                  backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL)
                 ),
                 Positioned(
                   right: -20,
@@ -48,7 +91,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       borderRadius: BorderRadius.circular(25)
                     ),
                     child: IconButton(
-                      onPressed: () {}, 
+                      onPressed: () => selectImage(), 
                       icon: const Icon(Icons.camera_alt_rounded)
                       ),
                   )
@@ -65,7 +108,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text("Name", style: TextStyle(color: maingreen),),
-                  TextInputField(tec: _nameController, tit: TextInputType.name, hintText: "Name",)
+                  TextInputField(tec: _nameController, tit: TextInputType.name, hintText: context.read<Providers>().getUser.name,)
                 ],
               ),
             ),
@@ -78,13 +121,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text("Email", style: TextStyle(color: maingreen),),
-                  TextInputField(tec: _emailController, tit: TextInputType.emailAddress, hintText: "Email",)
+                  TextInputField(tec: _emailController, tit: TextInputType.emailAddress, hintText: context.read<Providers>().getUser.email,)
                 ],
               ),
             ),
             Flexible(flex: 1, child: Container()),
             GestureDetector(
-              onTap: () {},
+              onTap: () => update(),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.3, vertical: 15),
                 decoration: BoxDecoration(

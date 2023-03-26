@@ -7,6 +7,15 @@ class Loader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network("https://media.tenor.com/F4oqZzepy5UAAAAC/bluefire.gif"),
+          Text("Burning Calories")
+        ],
+      )
+    );
   }
 }

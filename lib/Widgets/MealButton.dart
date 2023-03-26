@@ -10,7 +10,7 @@ class MealButton extends StatefulWidget {
     super.key,
     required this.meal,
     required this.color,
-    this.cal = 0,
+    required this.cal,
     required this.dosumn  
     });
 

@@ -28,6 +28,7 @@ class SettingsTitle extends StatelessWidget {
           child: Text(text, style: const TextStyle(fontSize: 27, fontWeight: FontWeight.w900),),
         ),
         Flexible(child: Container()),
+        const SizedBox(width: 40,)
       ],
       );
   }
