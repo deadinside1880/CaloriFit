@@ -30,6 +30,7 @@ class InfoSelectionBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               width: double.infinity,
               child: Row(
                 children: [
