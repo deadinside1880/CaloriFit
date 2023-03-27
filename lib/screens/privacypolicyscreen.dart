@@ -22,17 +22,17 @@ class PrivacyPolicyScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 30,
             ),
-            const SettingsTitle(text: "About Us"),
+            const SettingsTitle(text: "ABOUT US"),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 10,
+              height: MediaQuery.of(context).size.height / 23,
             ),
-            Text(
-              title,
-              style: const TextStyle(color: Color(0xFFB5B5B5), fontSize: 18),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // Text(
+            //   title,
+            //   style: const TextStyle(color: Color(0xFFB5B5B5), fontSize: 18),
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             Text(
               p1,
               style: const TextStyle(color: Color(0xFFB5B5B5), fontSize: 18),

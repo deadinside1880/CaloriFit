@@ -49,7 +49,7 @@ class AchievementScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SettingsTitle(text: "ACHIEVEMENTS"),
+                const SettingsTitle(text: "ACHIEVEMENTS",),
                 SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                 CircleAvatar(
                   backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),

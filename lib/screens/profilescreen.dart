@@ -124,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onTap: signOut,
             child: const Text("Sign Out", style: TextStyle(color: Colors.red, fontSize: 20),),
           ),
-          const SizedBox(height: 30,)
+          const SizedBox(height: 50,)
         ],
       ),
     );

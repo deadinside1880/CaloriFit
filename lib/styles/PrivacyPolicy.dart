@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 String title = "";
 
 String p1 =
-    "As our lives become busier and more fast-paced, it can be tough to maintain a healthy lifestyle.Balancing work, family, and social obligations with healthy eating and exercise can be a challenge for many people.";
-String p2 =
-    "This can result in weight gain, chronic illnesses, and a feeling of being unwell. ";
+    "As our lives become busier and more fast-paced, it can be tough to maintain a healthy lifestyle.Balancing work, family, and social obligations with healthy eating and exercise can be a challenge for many people. This can result in weight gain, chronic illnesses, and a feeling of being unwell.";
 
-String p3 =
-    "One of the biggest obstacles is a lack of knowledge about what constitutes a healthy diet, which can lead to poor eating habits, excessive calorie consumption, and insufficient nutrient intake.  Additionally, keeping track of calorie intake and adhering to recommended guidelines can be overwhelming and time-consuming.  Many people struggle to accurately monitor their food intake, and they may not have the resources or time to weigh and measure every meal. Lack of motivation to exercise is another issue for many individuals. They may find it hard to fit exercise into their busy schedules or dislike conventional forms of physical activity. As a result, a sedentary lifestyle can increase the risk of chronic diseases and weight gain. Lastly, it can be tough for people to track their progress, which can make it difficult to stay motivated and committed to healthy eating and exercise habits.";
+String p2 =
+    "CaloriFit is a holistic app designed to promote a healthy lifestyle for its users. It uses computer vision and object detection to count the number of calories in different items of your meal and detect the calorific and nutritional value of a plate of food by taking a picture and cross-referencing it with a database. In addition to this, the app allows users to register an account and log in to track their progress over time. ";
+
+String p3 = "CaloriFit is designed to help users lead a healthier lifestyle by providing a range of features to support their goals. Users can view the app's estimates as a general guide to determine their daily calorie intake and achieve their targets with ease while sharing their journey with their family and friends.";
