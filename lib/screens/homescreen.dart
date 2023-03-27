@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:isoweek/isoweek.dart';
 
 import '../Widgets/MealButton.dart';
 import '../models/Meal.dart';
@@ -56,8 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
         .meals
         .fold(0, (sum, meal) => sum + meal.calorieCount);
     setMeals();
-
+    Week currentWeek = Week.current();
+    // print(currentWeek.days[0].toString().split(' ')[0]);
+    String wkstart = DateFormat('d MMM yyyy').format(currentWeek.days[0]);
+    String wkend = DateFormat('d MMM yyyy').format(currentWeek.days[6]);
+    String wk = wkstart + ' - ' + wkend;
     String fullname = context.read<Providers>().getUser.name;
+    int limit_cals = context.read<Providers>().getUser.calorieGoal;
+    print("limit of calories for this user:$limit_cals");
     String _firstName;
     int idx = fullname.indexOf(" ");
     if (idx > 0) {
@@ -170,7 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 weeklyCalories: context
                                     .read<Providers>()
                                     .getUser
-                                    .weeklyCalories)),
+                                    .weeklyCalories,
+                                wk_lst: wk,
+                                limit: limit_cals,)),
                   ),
                   const SizedBox(
                     height: 10,

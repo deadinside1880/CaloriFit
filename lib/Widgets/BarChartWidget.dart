@@ -4,48 +4,66 @@ import '../styles/Colors.dart';
 
 class BarChartWidget extends StatefulWidget {
   final List<int> weeklyCalories;
-  const BarChartWidget({super.key, required this.weeklyCalories});
-
+  final String wk_lst;
+  final int limit;
+  BarChartWidget(
+      {super.key,
+      required this.weeklyCalories,
+      required this.wk_lst,
+      required this.limit});
   @override
   State<BarChartWidget> createState() => _BarChartWidgetState();
 }
 
 class _BarChartWidgetState extends State<BarChartWidget> {
-
   List<BarChartGroupData> _barGroups = [];
-  void setData(){
+  late int limit;
+
+  void setData() {
     print(widget.weeklyCalories);
-    List<int> temp = [0,0,0,0,0,0,0];
-    for(int i = 0; i<widget.weeklyCalories.length;i++){
+    List<int> temp = [0, 0, 0, 0, 0, 0, 0];
+    for (int i = 0; i < widget.weeklyCalories.length; i++) {
       temp[i] = widget.weeklyCalories[i];
     }
     setState(() {
+      limit = widget.limit;
+
       _barGroups = temp
-      .asMap().entries.map((entry) => 
-      BarChartGroupData(
-        x: entry.key, 
-        barRods: [
-          BarChartRodData(
-            toY: entry.value.toDouble(), 
-            gradient: _barsGradient
-            ),
-          ], 
-        showingTooltipIndicators: [0]))
-      .toList();
+          .asMap()
+          .entries
+          .map((entry) => BarChartGroupData(x: entry.key, barRods: [
+                BarChartRodData(
+                    toY: entry.value.toDouble(),
+                    gradient: widget.limit > entry.value.toDouble()
+                        ? _barsGradient
+                        : _barsGradientRed),
+              ], showingTooltipIndicators: [
+                entry.value.toDouble() > 0 ? 0 : 1
+              ]))
+          .toList();
     });
   }
 
-   LinearGradient get _barsGradient => const LinearGradient(
+  LinearGradient get _barsGradientRed => const LinearGradient(
         colors: [
-          Colors.cyan,
-          maingreen,
+          Color.fromRGBO(255, 120, 150, 1),
+          // Colors.redAccent[900],
+          Colors.red,
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+
+  LinearGradient get _barsGradient => const LinearGradient(
+        colors: [
+          green1,
+          green3,
         ],
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
       );
 
   List<BarChartGroupData> get barGroups => [
-
         BarChartGroupData(
           x: 0,
           barRods: [
@@ -119,35 +137,30 @@ class _BarChartWidgetState extends State<BarChartWidget> {
       ];
 
   BarTouchData get _barTouchData => BarTouchData(
-    enabled: false,
-    touchTooltipData: BarTouchTooltipData(
-      tooltipBgColor: Colors.transparent,
-      tooltipPadding: EdgeInsets.zero,
-      tooltipMargin: 8,
-      getTooltipItem: (
-        BarChartGroupData group,
-        int groupIndex,
-        BarChartRodData rod,
-        int rodIndex,
-      ) {
-        return BarTooltipItem(
-          rod.toY.round().toString(), 
-          const TextStyle(
-            color: Colors.cyan,
-            fontWeight: FontWeight.bold
-          )
-        );
-      }
-    )
-  );
+      enabled: false,
+      touchTooltipData: BarTouchTooltipData(
+          tooltipBgColor: Colors.transparent,
+          tooltipPadding: EdgeInsets.zero,
+          tooltipMargin: 8,
+          getTooltipItem: (
+            BarChartGroupData group,
+            int groupIndex,
+            BarChartRodData rod,
+            int rodIndex,
+          ) {
+            return BarTooltipItem(
+                rod.toY.round().toString(),
+                 TextStyle(
+                    color: rod.toY.toDouble() < limit
+                        ? Colors.cyan
+                        : Colors.red,
+                    fontWeight: FontWeight.bold));
+          }));
 
-    FlTitlesData get titlesData => FlTitlesData(
+  FlTitlesData get titlesData => FlTitlesData(
         show: true,
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            getTitlesWidget: getTitles
-          ),
+          sideTitles: SideTitles(showTitles: true, getTitlesWidget: getTitles),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
@@ -160,7 +173,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
         ),
       );
 
-    Widget getTitles(double value, TitleMeta meta) {
+  Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Colors.cyan,
       fontWeight: FontWeight.bold,
@@ -211,33 +224,49 @@ class _BarChartWidgetState extends State<BarChartWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.run_circle_rounded, size: 70,),
-              const SizedBox(width: 20,),
+              const Icon(
+                Icons.run_circle_rounded,
+                size: 70,
+              ),
+              const SizedBox(
+                width: 20,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Weekly Progress", style: TextStyle(color: maingreen, fontSize: 18, fontWeight: FontWeight.w500),),
-                  SizedBox(height: 15,),
-                  Text("6 Feb 2023 - 12 Feb 2023")
+                children: [
+                  const Text(
+                    "Weekly Progress",
+                    style: TextStyle(
+                        color: maingreen,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(widget.wk_lst)
                 ],
               )
             ],
           ),
-          const SizedBox(height: 20,),
-          Container(
-            height: MediaQuery.of(context).size.width*0.4,
-            width: MediaQuery.of(context).size.width*0.9,
-            child: BarChart(
-              BarChartData(
+          const SizedBox(
+            height: 20,
+          ),
+          Column(children: [
+            const SizedBox(height: 30),
+            Container(
+              height: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: BarChart(BarChartData(
                 alignment: BarChartAlignment.spaceEvenly,
                 barTouchData: _barTouchData,
                 gridData: FlGridData(show: false),
-                borderData: FlBorderData( show: false),
+                borderData: FlBorderData(show: false),
                 barGroups: _barGroups,
-                titlesData: titlesData
-              )
-            ),
-          )
+                titlesData: titlesData,
+              )),
+            )
+          ])
         ],
       ),
     );
