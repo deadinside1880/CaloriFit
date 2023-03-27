@@ -236,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 10,
                       ),
                       Visibility(
-                          visible: isPasswordWrong, child: Text(passwordError)),
+                          visible: isPasswordWrong, child: Text(passwordError, style: const TextStyle(color: Colors.red),)),
                       const SizedBox(
                         height: 10,
                       ),

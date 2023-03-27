@@ -227,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textAlign: TextAlign.start,
                   style: TextStyle(color: maingreen),
                 ),
-                TextInputField(tec: _nameController, tit: TextInputType.text),
+                TextInputField(tec: _nameController, tit: TextInputType.text, helperText: 'Enter your name',),
                 const SizedBox(
                   height: 10,
                 ),
@@ -237,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: TextStyle(color: maingreen),
                 ),
                 TextInputField(
-                    tec: _emailController, tit: TextInputType.emailAddress),
+                    tec: _emailController, tit: TextInputType.emailAddress, helperText: 'Enter your email address',),
                 const SizedBox(
                   height: 10,
                 ),
@@ -250,7 +250,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextInputField(
                     tec: _passwordController,
                     tit: TextInputType.text,
-                    isPass: true),
+                    isPass: true,
+                    helperText: 'Enter your password'),
                 const SizedBox(
                   height: 10,
                 ),
@@ -263,6 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   tec: _passwordAgainController,
                   tit: TextInputType.text,
                   isPass: true,
+                  helperText: 'Re-enter your password',
                 ),
                 const SizedBox(height: 10,),
                 Visibility(

@@ -27,10 +27,15 @@ class TextInputField extends StatelessWidget {
       decoration: InputDecoration(
         hintStyle: const TextStyle(color: Colors.white),
         hintText: hintText,
-        //helperText: helperText,
-        //border: inputBorder,
-        focusedBorder: InputBorder.none,
-        enabledBorder: InputBorder.none,
+        labelStyle: const TextStyle(
+          color: Colors.white,
+        ),
+        border: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white)),
+        // helperText: helperText,
+        // border: inputBorder.,
+        // focusedBorder: InputBorder.none,
+        // enabledBorder: InputBorder.none,
         filled: false,
         contentPadding: const EdgeInsets.all(8),
       ),
