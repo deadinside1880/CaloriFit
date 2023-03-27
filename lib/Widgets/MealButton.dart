@@ -24,7 +24,7 @@ class _MealButtonState extends State<MealButton> {
     return 
       Container(
         clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 30),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(48),
           color: widget.color,
@@ -34,13 +34,13 @@ class _MealButtonState extends State<MealButton> {
           child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(widget.meal, style: const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500)),
+            Text(widget.meal, style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500)),
             Flexible(child: Container()),
             //widget.cal > 0? const Icon(Icons.fireplace) : Container(),
             const SizedBox(width: 10,),
             widget.cal>0? 
-            Text("${widget.cal} cal",style: const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500)) 
-            : const Text("ADD", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),)
+            Text("${widget.cal} cal",style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500)) 
+            : const Text("ADD", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),)
           ],
         ),
       ),
