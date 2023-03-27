@@ -57,6 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
         .fold(0, (sum, meal) => sum + meal.calorieCount);
     setMeals();
 
+    String fullname = context.read<Providers>().getUser.name;
+    String _firstName;
+    int idx = fullname.indexOf(" ");
+    if (idx > 0) {
+        _firstName = fullname.substring(0, idx);} 
+    else {
+        _firstName = fullname;
+    }
+
     var date = DateTime.now();
     String datestr = DateFormat('EEEE, d MMM yyyy').format(date);
     print(datestr);
@@ -70,16 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Good Morning!",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                   Text(
+                    "Welcome back $_firstName!",
+                    style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    datestr
-                  )
+                  Text(datestr)
                 ],
               ),
               Flexible(child: Container()),
@@ -118,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   CircularPercentIndicator(
                                     radius:
-                                        MediaQuery.of(context).size.width /3.2,
+                                        MediaQuery.of(context).size.width / 3.2,
                                     lineWidth: 18,
                                     backgroundColor: const Color(0xFF7F7F7F),
                                     progressColor: maingreen,
