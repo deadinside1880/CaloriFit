@@ -17,18 +17,20 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
-
-  Image image = const Image(image: AssetImage('assets/Background.png'));
+  AssetImage image = const AssetImage('assets/Background.png');
   bool state = false;
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: Container(
         child: Stack(
           children: [
             AnimatedSwitcher(
-                duration: const Duration(seconds: 5), child: image),
+                duration: const Duration(seconds: 5),
+                child: Image(
+                    image: image, width: MediaQuery.of(context).size.width)),
             Container(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width / 10),
@@ -41,18 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Flexible(flex: 1, child: Container()),
                   const Text("ACTION IS THE KEY TO ALL SUCCESS",
                       style: onboardingText, textAlign: TextAlign.center),
-                  const SizedBox(height: 10),
-                  // const Text("",
-                  //     style: onboardingText, textAlign: TextAlign.center),
-
-                  // const Text("KEY TO ALL SUCCESS",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.w800,
-                  //           fontSize: 32,
-                  //           color: Colors.white),
-                  //         textAlign: TextAlign.center
-                  //       ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -87,8 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         } else {
                           setState(() {
                             state = true;
-                            image = const Image(
-                                image: AssetImage('assets/Background2.png'));
+                            image = const AssetImage('assets/Background2.png');
                             return;
                           });
                         }

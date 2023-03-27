@@ -90,13 +90,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Flexible(flex:1, child: Container()),
+                // Flexible(flex:1, child: Container()),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 8,
+                ),
+
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const LoginScreen())),
-                      child: const Text("Login")
+                      child: const Text("Log in")
                       ),
                     const SizedBox(width: 20,),
                     Column(
