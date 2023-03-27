@@ -61,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
     String _firstName;
     int idx = fullname.indexOf(" ");
     if (idx > 0) {
-        _firstName = fullname.substring(0, idx);} 
-    else {
-        _firstName = fullname;
+      _firstName = fullname.substring(0, idx);
+    } else {
+      _firstName = fullname;
     }
 
     var date = DateTime.now();
@@ -79,9 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
+                  Text(
                     "Welcome $_firstName!",
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),
+                    style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'IntegralCF'),
                   ),
                   const SizedBox(
                     height: 10,
@@ -90,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Flexible(child: Container()),
-              
             ],
           ),
           const SizedBox(
@@ -126,10 +128,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             0
                                         ? 0
                                         : todaysCals /
-                                            context
-                                                .watch<Providers>()
-                                                .getUser
-                                                .calorieGoal >=1? 1: todaysCals /
+                                                    context
+                                                        .watch<Providers>()
+                                                        .getUser
+                                                        .calorieGoal >=
+                                                1
+                                            ? 1
+                                            : todaysCals /
                                                 context
                                                     .watch<Providers>()
                                                     .getUser
@@ -195,45 +200,44 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 35,
           ),
-          Material(
-              child: MealButton(
+          Flexible(
+              child: ListView(
+            children: [
+              MealButton(
                   cal: breakfast == null ? 0 : breakfast!.calorieCount,
                   meal: "Breakfast",
                   color: green1,
-                  dosumn: breakfast != null? () => Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AddNewMealWidget(
-                                color: green1, meal: "Breakfast")))
-                            : (){}
-                  )
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Material(
-              child: MealButton(
+                  dosumn: breakfast == null
+                      ? () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AddNewMealWidget(
+                              color: green1, meal: "Breakfast")))
+                      : () {}),
+              const SizedBox(
+                height: 15,
+              ),
+              MealButton(
                   cal: lunch == null ? 0 : lunch!.calorieCount,
                   meal: "Lunch",
                   color: green2,
-                  dosumn: lunch!=null? () => Navigator.of(context).push(MaterialPageRoute(
+                  dosumn: lunch == null
+                      ? () => Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const AddNewMealWidget(
                               color: green2, meal: "Lunch")))
-                          : (){}
-              )
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Material(
-              child: MealButton(
+                      : () {}),
+              const SizedBox(
+                height: 15,
+              ),
+              MealButton(
                   cal: dinner == null ? 0 : dinner!.calorieCount,
                   meal: "Dinner",
                   color: green3,
-                  dosumn: dinner!=null? () => Navigator.of(context).push(MaterialPageRoute(
+                  dosumn: dinner == null
+                      ? () => Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const AddNewMealWidget(
                               color: green3, meal: "Dinner")))
-                          : (){}
-                  )
-              ),
+                      : () {})
+            ],
+          )),
           const SizedBox(
             height: 15,
           ),

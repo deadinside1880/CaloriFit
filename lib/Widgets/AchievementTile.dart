@@ -33,9 +33,10 @@ class _AchievementTileState extends State<AchievementTile> {
     double progress = context.read<Providers>().getUser.highestStreak/ widget.achievement.goal;
     if(progress>1) progress = 1;
     return GestureDetector(
-      onTap: () => Navigator.of(context)
+      onTap: progress == 1? () => Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => 
-        AchievementDetails(achievement: widget.achievement,))),
+        AchievementDetails(achievement: widget.achievement,)))
+        :(){},
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

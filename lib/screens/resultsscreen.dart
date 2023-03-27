@@ -37,10 +37,14 @@ class _ResultScreenState extends State<ResultScreen> {
     MealType mealtype = widget.mealType == "Breakfast"? MealType.BREAKFAST : widget.mealType == "Lunch"? MealType.LUNCH : MealType.DINNER;
     context.read<Providers>().getUser.meals.map((meal) => {
       if(meal.mealType == mealtype) {
-        exists = true
+        exists = true,
+        print("hello htere"),
+        print(meal.mealType),
+        print(mealtype)
       }
       });
     if(exists) {return;}
+    print("after duplicate check");
     context.read<Providers>().addMeal(Meal(mealType: mealtype, calorieCount: cals, meal: widget.mealType));
     updateWeekly(mealtype, cals);
     AuthMethods _amo = AuthMethods();
@@ -64,6 +68,7 @@ class _ResultScreenState extends State<ResultScreen> {
         future: FirebaseFirestore.instance.collection("foods").where("name", isEqualTo: widget.food).get(),
         builder : (context, snapshot){
           if(snapshot.hasData){
+            updateMeal(snapshot.data!.docs[0]['calories']);
             return Container(
               padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.height/20, 
@@ -87,41 +92,6 @@ class _ResultScreenState extends State<ResultScreen> {
                     meal: widget.food, 
                     isLastOption:true, 
                     cals: snapshot.data!.docs[0]['calories'], 
-                    ),
-                    Text(
-                      widget.mealType,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        // fontFamrily: 'IntegralCF',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: Image.file(
-                        widget.image,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "Based on our AI engine, we have identified the following food items:",
-                      style: TextStyle(),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    IDResultsTile(
-                      meal: widget.food,
-                      isLastOption: true,
-                      cals: snapshot.data!.docs[0]['calories'],
-                    ),
-                    const SizedBox(
-                      height: 20,
                     ),
                     const Text(
                       "Feel these are not accurate? Please let us know!",

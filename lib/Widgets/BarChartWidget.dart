@@ -14,13 +14,13 @@ class _BarChartWidgetState extends State<BarChartWidget> {
 
   List<BarChartGroupData> _barGroups = [];
   void setData(){
-    while(widget.weeklyCalories.length < 7){
-      setState(() {
-        widget.weeklyCalories.add(0);
-      });
+    print(widget.weeklyCalories);
+    List<int> temp = [0,0,0,0,0,0,0];
+    for(int i = 0; i<widget.weeklyCalories.length;i++){
+      temp[i] = widget.weeklyCalories[i];
     }
     setState(() {
-      _barGroups = widget.weeklyCalories
+      _barGroups = temp
       .asMap().entries.map((entry) => 
       BarChartGroupData(
         x: entry.key, 
