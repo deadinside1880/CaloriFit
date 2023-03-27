@@ -17,6 +17,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
 
+  Image image = const Image(image: AssetImage('assets/Background.jpg'));
+  bool state = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,17 +34,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.width/10),
-                    const CaloriFitTitle(color: Colors.white),
+                  const Text("CaloriFit",
+                      style: onboardingSmallText, textAlign: TextAlign.center),
+                    // const CaloriFitTitle(color: Colors.white),
                     Flexible(flex: 1, child: Container()),
-                    const Text("ACTION IS THE", style: onboardingText, textAlign: TextAlign.center),
+                    const Text("ACTION IS THE", style: onboardingSmallText, textAlign: TextAlign.center),
                     const SizedBox(height: 10),
-                    const Text("KEY TO ALL SUCCESS", 
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800, 
-                              fontSize: 32, 
-                              color: Colors.white), 
-                            textAlign: TextAlign.center
-                          ),
+                  const Text("KEY TO ALL SUCCESS",
+                      style: onboardingSmallText, textAlign: TextAlign.center),
+                    // const Text("KEY TO ALL SUCCESS", 
+                    //         style: TextStyle(
+                    //           fontWeight: FontWeight.w800, 
+                    //           fontSize: 32, 
+                    //           color: Colors.white), 
+                    //         textAlign: TextAlign.center
+                    //       ),
                     const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -54,8 +61,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     SizedBox(height: MediaQuery.of(context).size.height/15),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 -10),
-                      child: InkWell(
-                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen())),
+                      child: GestureDetector(
+                        onTap: () {
+                          if(state){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const SignUpScreen()));
+                          }else{
+                            setState(() {
+                              state = true;
+                              image = const Image(image: AssetImage('assets/Background2.jpg'));
+                              return;
+                            });
+                          }
+                        },
                         child: Container(
                           
                           padding: const EdgeInsets.symmetric(vertical: 20),

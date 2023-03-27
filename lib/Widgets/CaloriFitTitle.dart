@@ -10,7 +10,7 @@ class CaloriFitTitle extends StatelessWidget {
     return Text(
                             "CaloriFit",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color),
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: color),
                              );
   }
 }

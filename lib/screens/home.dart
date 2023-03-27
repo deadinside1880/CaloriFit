@@ -65,6 +65,9 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
+        iconSize: 28,
+        showSelectedLabels: false,
+        showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_rounded, 

@@ -21,11 +21,19 @@ class MealButton extends StatefulWidget {
 class _MealButtonState extends State<MealButton> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     return InkWell(
       onTap: widget.dosumn,
       borderRadius: BorderRadius.circular(48),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
+=======
+    return 
+      Container(
+        
+        clipBehavior: Clip.antiAlias,
+        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 30),
+>>>>>>> Stashed changes
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(48),
           color: widget.color,

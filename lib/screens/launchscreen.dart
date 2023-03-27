@@ -22,7 +22,7 @@ class LaunchScreen extends StatelessWidget {
                             ),
                         const CaloriFitTitle(color: Colors.white),
                         SizedBox(height: MediaQuery.of(context).size.height/25),
-                        const Text("Not your average calorie counting app", style: onboardingText, textAlign: TextAlign.center,),
+                        const Text("not your average calorie counting app", style: onboardingSmallText, textAlign: TextAlign.center,),
                         SizedBox(height: MediaQuery.of(context).size.height/10),
                         InkWell(
                             onTap: () => Navigator.of(context).
@@ -42,7 +42,7 @@ class LaunchScreen extends StatelessWidget {
                                     )
                             )
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height/15)
+                        SizedBox(height: MediaQuery.of(context).size.height/8)
                     ],
                 ),
             )

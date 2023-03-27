@@ -1,30 +1,35 @@
 import 'package:calori_fit/Widgets/AchievementTile.dart';
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
+import 'package:calori_fit/Widgets/Loader.dart';
 import 'package:calori_fit/Widgets/SettingsTitle.dart';
+import 'package:calori_fit/models/Achievement.dart';
+import 'package:calori_fit/resources/providers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AchievementScreen extends StatelessWidget {
-  const AchievementScreen({super.key, required this.photoURL});
-  final String photoURL;
+  const AchievementScreen({super.key});
 
   static const achievements = [
     {
-      'title' : 'Quarter Manager',
+      'title' : 'QUARTER MANAGER',
       'description' : '3 months streak',
-      'progress' : 0.33
+      'progress' : 0.25
     },
     {
-      'title' : 'B2B Months Success',
+      'title' : 'B2B MONTHS SUCCESS',
       'description' : '2 months streak',
       'progress' : 0.67
     },
     {
-      'title' : 'Monthly Routine',
+      'title' : 'MONTHLY ROUTINE',
       'description' : '1 month streak',
       'progress' : 1
     },
     {
-      'title' : 'More than a week',
+      'title' : 'MORE THAN A WEEK',
       'description' : '8 days streak',
       'progress' : 1
     }
@@ -32,30 +37,37 @@ class AchievementScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width/20, 
-        vertical: MediaQuery.of(context).size.height/80
-        ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SettingsTitle(text: "ACHIEVEMENTS"),
-          SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-          CircleAvatar(
-            backgroundImage: NetworkImage(photoURL),
-            radius: 60,
+    return FutureBuilder(
+      future: FirebaseFirestore.instance.collection("achievements").orderBy("goal", descending: false).get(),
+      builder: (context, snapshot){
+        if(snapshot.hasData){
+          return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width/20, 
+              vertical: MediaQuery.of(context).size.height/80
+              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SettingsTitle(text: "ACHIEVEMENTS"),
+                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+
+                CircleAvatar(
+                  backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),
+                  radius: 60,
+                  ),
+                const SizedBox(height: 65,),
+                ...snapshot.data!.docs.map((snap){
+                  Achievement achievement = Achievement.modelFromSnap(snap);
+                  return AchievementTile(achievement: achievement,);
+                })
+              ],
             ),
-          const SizedBox(height: 30,),
-          ...achievements.map((achievement) =>
-            AchievementTile(
-              achievementTitle: achievement['title'] as String, 
-              achievementDescription:achievement['description'] as String,
-              progress: achievement['progress'] as num,
-            )
-          )
-        ],
-      ),
+          );
+        }else{
+          return const Loader();
+        }
+      }
     );
   }
 }
