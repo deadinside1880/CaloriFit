@@ -68,25 +68,25 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
               width: 300,
               child: Image.file(image!)
               ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 40,),
             Material(
               borderRadius: BorderRadius.circular(5),
               child: GestureDetector(
                 onTap: () => selectImage(),
                 child: Container(
                   width: MediaQuery.of(context).size.width*0.7,
-                  height: 40,
+                  height: 75,
                   decoration: BoxDecoration(
                     color: maingreen,
-                    borderRadius: BorderRadius.circular(5)
+                    borderRadius: BorderRadius.circular(32)
                   ),
                   alignment: Alignment.center,
                   child: const Text("Upload Image", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),),
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
-            const Text("Please upload an image of your meal. Our State-of-the-art AI engine will identify food items based on that. It's just that simple!",
+            const SizedBox(height: 100,),
+            const Text("Please upload an image of your meal. Our State-of-the-art AI engine will identify food item(s) based on that.\n\n It's just that simple!",
               style: TextStyle(color: Colors.white, fontSize: 18, decoration: TextDecoration.none, height: 1.5),
               textAlign: TextAlign.center,
             ),

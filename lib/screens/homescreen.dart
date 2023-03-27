@@ -80,27 +80,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                    Text(
-                    "Welcome back $_firstName!",
-                    style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                    "Welcome $_firstName!",
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(datestr)
+                  Text(datestr, style: const TextStyle(fontSize: 20))
                 ],
               ),
               Flexible(child: Container()),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: const [
-                  Icon(
-                    Icons.sunny,
-                    color: Colors.yellow,
-                  ),
-                  Text("28C"),
-                  Text("Singapore")
-                ],
-              )
+              
             ],
           ),
           const SizedBox(

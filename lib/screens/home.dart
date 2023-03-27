@@ -6,7 +6,6 @@ import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import 'achievementscreen.dart';
 import 'homescreen.dart';
 
@@ -24,22 +23,26 @@ class _HomeState extends State<Home> {
   late PageController _pageController;
   bool isLoading = true;
 
-  void pageTapped(int page){
+  void pageTapped(int page) {
     _pageController.jumpToPage(page);
   }
 
-  void onPageChanged(int page){
+  void onPageChanged(int page) {
     setState(() {
       _page = page;
     });
   }
 
-  void setUser(BuildContext context) async{
+  void setUser(BuildContext context) async {
     setState(() {
       isLoading = true;
     });
     setState(() {
-      homescreens = [const HomeScreen(), const AchievementScreen(), const ProfileScreen(),];
+      homescreens = [
+        const HomeScreen(),
+        const AchievementScreen(),
+        const ProfileScreen(),
+      ];
       isLoading = false;
     });
   }
@@ -49,17 +52,21 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     _pageController = PageController();
-    homescreens = [const HomeScreen(), const AchievementScreen(), const ProfileScreen(),];
+    homescreens = [
+      const HomeScreen(),
+      const AchievementScreen(),
+      const ProfileScreen(),
+    ];
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     _pageController.dispose();
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     setUser(context);
     return Scaffold(
       appBar: AppBar(
@@ -69,31 +76,44 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         shadowColor: Colors.transparent,
       ),
-      body: isLoading? const Loader() 
-      : PageView(
-        controller: _pageController,
-        onPageChanged: onPageChanged,
-        children: homescreens,
-      ),
+      body: isLoading
+          ? const Loader()
+          : PageView(
+              controller: _pageController,
+              onPageChanged: onPageChanged,
+              children: homescreens,
+            ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded, 
-            color: _page == 0? Colors.white : const Color(0xFF505050),
-            ), 
-            label: ''),
+              icon: SizedBox(
+                  height: 50,
+                  child: Icon(
+                    Icons.home_rounded,
+                    size: 30,
+                    color: _page == 0 ? Colors.white : const Color(0xFF505050),
+                  )),
+              label: ''),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_rounded,
-            color: _page == 1? Colors.white : const Color(0xFF505050)
-            ), 
-            label: ''),
+              icon: SizedBox(
+                height: 50,
+                child: Icon(Icons.bar_chart_rounded,
+                    size: 30,
+                    color: _page == 1 ? Colors.white : const Color(0xFF505050)),
+              ),
+              label: ''),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, 
-            color: _page == 2? Colors.white : const Color(0xFF505050),
-            ), 
-            label: ''),
+              icon: SizedBox(
+                height: 50,
+                child: Icon(
+                  Icons.person,
+                  size: 30,
+                  color: _page == 2 ? Colors.white : const Color(0xFF505050),
+                ),
+              ),
+              label: ''),
         ],
         onTap: pageTapped,
       ),

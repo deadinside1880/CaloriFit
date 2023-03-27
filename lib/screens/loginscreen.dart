@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Text("Welcome back", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Colors.white),),
                 const SizedBox(height: 5,),
                 const Text("Log in to your account", style: TextStyle(fontSize: 15, color: Colors.white),),
-                SizedBox(height: MediaQuery.of(context).size.height,),
+                SizedBox(height: MediaQuery.of(context).size.height/20,),
                 const Text("Email", style: TextStyle(color: maingreen),),
                 Stack(
                   alignment: Alignment.centerRight,

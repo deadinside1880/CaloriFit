@@ -83,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onTap: () {
                         if (state) {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SignUpScreen()));
+                              builder: (context) => const LoginScreen()));
                         } else {
                           setState(() {
                             state = true;

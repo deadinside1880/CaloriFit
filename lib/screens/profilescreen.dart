@@ -95,9 +95,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           const SizedBox(height: 20,),
-          Text(_firstName, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),),
+          Text(_firstName, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),),
           const SizedBox(height: 10,),
-          Text(_lastName, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),),
+          Text(_lastName, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),),
           const SizedBox(height: 50,),
           ProfileScreenOption(
             onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditProfileScreen())) , 
