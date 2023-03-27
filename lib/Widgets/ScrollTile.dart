@@ -10,6 +10,7 @@ class ScrollTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 1),
       child: Center(
         child: Text(
           number.toString(),

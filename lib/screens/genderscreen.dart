@@ -6,6 +6,8 @@ import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 
+import '../Widgets/CaloriFitTitleSmall.dart';
+
 
 class GenderScreen extends StatefulWidget {
   const GenderScreen({super.key});
@@ -28,12 +30,12 @@ class _GenderScreenState extends State<GenderScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: MediaQuery.of(context).size.height/10,),
-            const CaloriFitTitle(color: Colors.white),
-            SizedBox(height: MediaQuery.of(context).size.height/10,),
-            const Text("TELL US ABOUT YOURSELF!", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
+            const CaloriFitSmallTitle(color: Colors.white),
+            SizedBox(height: MediaQuery.of(context).size.height/30,),
+            const Text("TELL US ABOUT YOURSELF", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900, fontFamily: 'IntegralCF'),),
             const SizedBox(height: 15,),
             const Text("TO GIVE YOU A BETTER EXPERIENCE WE NEED"),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 5,),
             const Text("TO KNOW YOUR GENDER"),
             SizedBox(height:MediaQuery.of(context).size.height/15,),
             GestureDetector(
