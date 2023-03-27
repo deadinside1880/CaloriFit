@@ -24,11 +24,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordAgainController =
-      TextEditingController();
+  final TextEditingController _passwordAgainController = TextEditingController();
   final _imagePicker = ImagePicker();
 
   File? profilepic;
+  String error = "";
+  bool isError= false;
+  bool isEmailValid = false;
 
   void selectImage() async {
     XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -40,6 +42,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _passwordAgainController.addListener(password2);
+    _emailController.addListener(typeEmail);
+  }
+
+  void typeEmail(){
+    setState(() {
+      if(RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(_emailController.text)){
+            isEmailValid=true;
+          }else{
+            isEmailValid = false;
+          }
+    });
+  }
+
+  void password2(){
+    setState(() {
+      if(_passwordAgainController.text != _passwordController.text){
+        isError = true;
+        error="Passwords do not match";
+      }else{
+        isError = false;
+        error = "";
+      }
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _nameController.dispose();
@@ -48,7 +82,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _passwordController.dispose();
   }
 
+  bool checkError(){
+    setState(() {
+      isError = false;
+      if(_emailController.text.isEmpty){
+        error="Please Enter email address";
+        isError = true;
+      }else if(_passwordController.text.isEmpty){
+        error = "Please Enter Password";
+        isError = true;
+      }else if(_passwordController.text.length < 6){
+        error="Password should be more than 6 characters";
+        isError = true;
+      }else if(profilepic==null){
+        error ="Please upload a picture";
+        isError=true;
+      }else if(_nameController.text.isEmpty){
+        error = "Please enter a name";
+        isError = true;
+      }else if(!isEmailValid){
+        error = "Please enter a valid email";
+        isError = true;
+      }
+    });
+    return isError;
+  }
+
   void signUpUser() async {
+    if(checkError()){return;}
     AuthMethods amo = AuthMethods();
     String result = await amo.registerUser(
         email: _emailController.text,
@@ -175,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     tec: _passwordController,
                     tit: TextInputType.text,
                     isPass: true),
-                                const SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 const Text(
@@ -187,6 +248,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   tec: _passwordAgainController,
                   tit: TextInputType.text,
                   isPass: true,
+                ),
+                const SizedBox(height: 10,),
+                Visibility(
+                  visible: isError,
+                  child: Text(error, style: const TextStyle(color: Colors.red),)
                 ),
                 Flexible(flex: 1, child: Container()),
                 Container(

@@ -24,6 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isEmailEmpty = true;
   bool obscurePassword = true;
   bool isLoading = false;
+  bool isEmailWrong = false;
+  bool isPasswordWrong = false;
+  String emailError = "";
+  String passwordError = "";
 
   @override
   void initState() {
@@ -68,6 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.of(context).pop();
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const Home()));
+    }else{
+      setState(() {
+        passwordError = res;
+        isPasswordWrong = true;
+      });
     }
   }
 
@@ -209,6 +218,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         ],
                       ),
+                      const SizedBox(height: 10,),
+                      Visibility(
+                        visible: isPasswordWrong,
+                        child: Text(passwordError)),
                       const SizedBox(
                         height: 10,
                       ),

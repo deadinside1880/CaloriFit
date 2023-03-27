@@ -34,11 +34,28 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
 
   void updateMeal(int cals)async {
+    bool exists = false;
     MealType mealtype = widget.mealType == "Breakfast"? MealType.BREAKFAST : widget.mealType == "Lunch"? MealType.LUNCH : MealType.DINNER;
+    context.read<Providers>().getUser.meals.map((meal) => {
+      if(meal.mealType == mealtype) {
+        exists = true
+      }
+      });
+    if(exists) {return;}
     context.read<Providers>().addMeal(Meal(mealType: mealtype, calorieCount: cals, meal: widget.mealType));
+    updateWeekly(mealtype, cals);
     AuthMethods _amo = AuthMethods();
     await _amo.updateUser(context.watch<Providers>().getUser);
-    print(context.read<Providers>().getUser.meals);
+  }
+
+  void updateWeekly(MealType mealType, int cals){
+    List<int> weeklyCalories = context.read<Providers>().getUser.weeklyCalories;
+    if(mealType == MealType.BREAKFAST){
+      weeklyCalories.add(cals);
+    }else{
+      weeklyCalories[weeklyCalories.length-1]+=cals;
+    }
+    context.read<Providers>().setWeeklyCals = weeklyCalories;
   }
 
   @override
@@ -48,9 +65,6 @@ class _ResultScreenState extends State<ResultScreen> {
         future: FirebaseFirestore.instance.collection("foods").where("name", isEqualTo: widget.food).get(),
         builder : (context, snapshot){
           if(snapshot.hasData){
-            updateMeal(snapshot.data!.docs[0]['calories']);
-            print(widget.food);
-            print(snapshot.data);
             return Container(
               padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.height/20, 

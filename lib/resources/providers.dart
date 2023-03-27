@@ -56,6 +56,11 @@ class Providers extends ChangeNotifier{
     notifyListeners();
   }
 
+  set setWeeklyCals(List<int> weeklyCalories){
+    _user!.weeklyCalories = weeklyCalories;
+    notifyListeners();
+  }
+
   Future<void> refreshUser() async{
     User user = await _amo.getUserDetails();
     _user = user;

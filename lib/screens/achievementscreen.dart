@@ -56,10 +56,17 @@ class AchievementScreen extends StatelessWidget {
                   radius: 100,
                   ),
                 const SizedBox(height: 60,),
-                ...snapshot.data!.docs.map((snap){
-                  Achievement achievement = Achievement.modelFromSnap(snap);
-                  return AchievementTile(achievement: achievement,);
-                })
+                Container(
+                  height: MediaQuery.of(context).size.height/2-120,
+                  child: ListView(
+                    children: [
+                      ...snapshot.data!.docs.map((snap){
+                      Achievement achievement = Achievement.modelFromSnap(snap);
+                      return AchievementTile(achievement: achievement,);
+                  })
+                    ],
+                  ),
+                )
               ],
             ),
           );

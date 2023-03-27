@@ -196,9 +196,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   cal: breakfast == null ? 0 : breakfast!.calorieCount,
                   meal: "Breakfast",
                   color: green1,
-                  dosumn: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddNewMealWidget(
-                          color: green1, meal: "Breakfast"))))),
+                  dosumn: breakfast != null? () => Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const AddNewMealWidget(
+                                color: green1, meal: "Breakfast")))
+                            : (){}
+                  )
+          ),
           const SizedBox(
             height: 15,
           ),
@@ -207,9 +210,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   cal: lunch == null ? 0 : lunch!.calorieCount,
                   meal: "Lunch",
                   color: green2,
-                  dosumn: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddNewMealWidget(
-                          color: green2, meal: "Lunch"))))),
+                  dosumn: lunch!=null? () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AddNewMealWidget(
+                              color: green2, meal: "Lunch")))
+                          : (){}
+              )
+          ),
           const SizedBox(
             height: 15,
           ),
@@ -218,9 +224,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   cal: dinner == null ? 0 : dinner!.calorieCount,
                   meal: "Dinner",
                   color: green3,
-                  dosumn: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddNewMealWidget(
-                          color: green3, meal: "Dinner"))))),
+                  dosumn: dinner!=null? () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AddNewMealWidget(
+                              color: green3, meal: "Dinner")))
+                          : (){}
+                  )
+              ),
           const SizedBox(
             height: 15,
           ),
