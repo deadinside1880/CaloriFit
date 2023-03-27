@@ -21,14 +21,14 @@ class LaunchScreen extends StatelessWidget {
           ),
           Image.asset("assets/Logo.png"),
           SizedBox(
-            height: MediaQuery.of(context).size.height / 25,
+            height: MediaQuery.of(context).size.height / 30,
           ),
           const CaloriFitTitle(color: Colors.white),
-          SizedBox(height: MediaQuery.of(context).size.height / 39),
+          SizedBox(height: MediaQuery.of(context).size.height / 27),
           const Text(
-            "not your average calorie counting app",
+            "not your average calorie counting app :)",
             style: TextStyle(
-                fontSize: 19,
+                fontSize: 18,
                 fontWeight: FontWeight.w400,
                 color: Colors.white,),
             textAlign: TextAlign.center,
@@ -38,8 +38,8 @@ class LaunchScreen extends StatelessWidget {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const OnboardingScreen())),
               child: Container(
-                  padding: const EdgeInsets.fromLTRB(40, 30, 40, 30),
-                  // padding: const EdgeInsets.symmetric(vertical: 30),
+                  // padding: const EdgeInsets.fromLTRB(30, 25, 30, 25),
+                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 35),
                   // width: double.infinity,
                   decoration: buttonShapeDecor,
                   child: const Text("Let's get started!",
