@@ -50,12 +50,12 @@ class AchievementScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SettingsTitle(text: "ACHIEVEMENTS"),
-                SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                 CircleAvatar(
                   backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),
-                  radius: 60,
+                  radius: 100,
                   ),
-                const SizedBox(height: 30,),
+                const SizedBox(height: 60,),
                 ...snapshot.data!.docs.map((snap){
                   Achievement achievement = Achievement.modelFromSnap(snap);
                   return AchievementTile(achievement: achievement,);

@@ -46,14 +46,14 @@ class _AchievementTileState extends State<AchievementTile> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(backgroundImage: NetworkImage(widget.achievement.photoURL),),
-            const SizedBox(width: 10,),
+            CircleAvatar(backgroundImage: NetworkImage(widget.achievement.photoURL), radius: 35,),
+            const SizedBox(width: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.achievement.title),
-                const SizedBox(height: 10,),
-                Text("${widget.achievement.goal}  days streak"),
+                Text(widget.achievement.title, style: const TextStyle(fontSize:15,fontWeight: FontWeight.w900)),
+                const SizedBox(height: 7.9,),
+                Text("${widget.achievement.goal} day(s) streak successfully!"),
                 const SizedBox(height: 10,),
                 Container(
                   clipBehavior: Clip.antiAlias,
