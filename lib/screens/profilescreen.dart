@@ -97,17 +97,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 20,),
           Text(_firstName, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),),
           const SizedBox(height: 10,),
-          Text(_lastName, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w700),),
-          const SizedBox(height: 20,),
+          Text(_lastName, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),),
+          const SizedBox(height: 50,),
           ProfileScreenOption(
             onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditProfileScreen())) , 
             text: "Edit Profile",
             isLastOption: false,
           ),
+          const SizedBox(
+            height: 10,
+          ),
           ProfileScreenOption(
             onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen())), 
-            text: "Privacy Policy", 
+            text: "About Us", 
             isLastOption: false,),
+          const SizedBox(
+            height: 10,
+          ),
           ProfileScreenOption(
             onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MainSettings())), 
             text: "Settings", 

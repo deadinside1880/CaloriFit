@@ -22,10 +22,10 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CaloriFitTitle(color: Colors.white),
+            // const CaloriFitTitle(color: Colors.white),
             SizedBox(height: MediaQuery.of(context).size.height/20),
             SettingsTitle(text: title),
-            SizedBox(height: MediaQuery.of(context).size.height/40),
+            SizedBox(height: MediaQuery.of(context).size.height/10),
             ...widgets
           ],
         )
