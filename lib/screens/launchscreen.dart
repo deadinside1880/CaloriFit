@@ -28,7 +28,7 @@ class LaunchScreen extends StatelessWidget {
           const Text(
             "not your average calorie counting app",
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 19,
                 fontWeight: FontWeight.w400,
                 color: Colors.white,),
             textAlign: TextAlign.center,

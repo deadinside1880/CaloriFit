@@ -90,30 +90,24 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
           children: [
             const SettingsTitle(text: "Add New Meal"),
             const SizedBox(
-              height: 50,
+              height: 40,
             ),
             Text(
               widget.meal,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
-                // fontFamily: 'IntegralCF',
+                fontFamily: 'IntegralCF',
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 10,
             ),
             image == null
-                ? const Image(
-                    image: NetworkImage(
-                      "https://images7.alphacoders.com/129/1297416.png",
-                    ),
-                    // width: 100,
-                    // height: 100,
-                  )
+                ? Image.asset("assets/round.png")
                 : Container(child: Image.file(image!)),
             const SizedBox(
-              height: 60,
+              height: 30,
             ),
             Material(
               borderRadius: BorderRadius.circular(5),
@@ -137,10 +131,10 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 20,
             ),
             const Text(
-              "Please upload an image of your meal.\n\nOur State-of-the-art AI engine will identify food item(s) based on that.\n\n It's just that simple!",
+              "Please upload an image of your meal. Our State-of-the-art AI engine will identify food item(s) based on that.\nIt's just that simple!",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

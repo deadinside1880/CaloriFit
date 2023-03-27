@@ -73,8 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void parseError(String res){
-    setState(() {
-
+      setState(() {
         passwordError = errors[res]!;
         isPasswordWrong = true;
       });
@@ -88,7 +87,26 @@ class _LoginScreenState extends State<LoginScreen> {
           ? const Loader()
           : Stack(
               children: [
-                const Image(image: AssetImage("assets/Background2.png")),
+                // const Image(image: AssetImage("assets/bg2.png")),
+                ShaderMask(
+                  shaderCallback: (rect) {
+                    return const LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topLeft,
+                      colors: [
+                        Colors.transparent,
+                        Color.fromRGBO(28, 16, 24, 1)
+                      ],
+                    ).createShader(
+                        Rect.fromLTRB(0, 0, rect.width, rect.height));
+                  },
+                  blendMode: BlendMode.dstIn,
+                  child: Image.asset(
+                    'assets/bg3.png',
+                    // height: 400,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width / 20),
@@ -218,23 +236,30 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Visibility(
                         visible: isPasswordWrong,
                         child: Text(passwordError, style: const TextStyle(color: Colors.red),)),
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                          width: double.infinity,
-                          alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: const Text(
-                              "Forgot Password",
-                              style: TextStyle(color: maingreen),
-                            ),
-                          )),
+                      Visibility(
+                          visible: isPasswordWrong, child: Text(passwordError, style: const TextStyle(color: Colors.red),)),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // Container(
+                      //     width: double.infinity,
+                      //     alignment: Alignment.centerRight,
+                      //     child: GestureDetector(
+                      //       onTap: () {},
+                      //       child: const Text(
+                      //         "Forgot Password",
+                      //         style: TextStyle(color: maingreen),
+                      //       ),
+                      //     )),
                       Flexible(flex: 1, child: Container()),
                       Container(
                         padding: EdgeInsets.symmetric(
