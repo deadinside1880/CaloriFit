@@ -115,6 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         :
                         CircleAvatar(
                           backgroundImage: FileImage(profilepic!),
+                          radius: 50,
                         ),
                         IconButton(
                           onPressed: ()=>  selectImage(),
