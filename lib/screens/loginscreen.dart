@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
       :
       Stack(
         children: [
-          const Image(image: AssetImage("assets/Background3.png")),
+          const Image(image: AssetImage("assets/Background2.png")),
           Container(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
             child: Column(
@@ -92,7 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                Flexible(flex:1,child: Container(),),
+                // Flexible(flex:1,child: Container(),),
+                SizedBox(height: MediaQuery.of(context).size.height/8,),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
