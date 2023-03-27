@@ -49,6 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  LinearGradient get _gradient => const LinearGradient(
+        colors: [
+          maingreen,
+          Color.fromRGBO(86, 200, 100, 1),
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+      
   @override
   Widget build(BuildContext context) {
     int todaysCals = context
@@ -123,11 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 alignment: Alignment.center,
                                 children: [
                                   CircularPercentIndicator(
+                                    linearGradient: _gradient,
+                                    rotateLinearGradient: true,
                                     radius:
-                                        MediaQuery.of(context).size.width / 3.2,
-                                    lineWidth: 18,
+                                        MediaQuery.of(context).size.width / 3,
+                                    lineWidth: 11,
                                     backgroundColor: const Color(0xFF7F7F7F),
-                                    progressColor: maingreen,
+                                    // progressColor: maingreen,
                                     percent: context
                                                 .watch<Providers>()
                                                 .getUser
@@ -159,14 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         "Today",
                                         style: TextStyle(
                                             fontSize: 22,
+                                            fontFamily: 'IntegralCF',
                                             color: Color.fromRGBO(
                                                 255, 255, 255, 0.6)),
                                       ),
                                       FittedBox(
                                           child: Text(
-                                        "$todaysCals cal",
+                                        "$todaysCals cals",
                                         style: const TextStyle(
-                                            fontSize: 48,
+                                            fontFamily: 'IntegralCF',
+                                            fontSize: 38,
                                             fontWeight: FontWeight.w600),
                                       ))
                                     ],
@@ -179,7 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .getUser
                                     .weeklyCalories,
                                 wk_lst: wk,
-                                limit: limit_cals,)),
+                                limit: limit_cals,
+                              )),
                   ),
                   const SizedBox(
                     height: 10,
