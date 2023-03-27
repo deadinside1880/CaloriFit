@@ -64,14 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await amo.signInUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success' && context.mounted) {
-      context.read<Providers>().refreshUser();
-      setState(() {
-        isLoading = true;
-      });
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Home()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+        builder: (context) => const Home()), 
+        (Route<dynamic> route) => false);
     }else{
       setState(() {
         passwordError = res;

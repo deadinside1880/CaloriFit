@@ -2,6 +2,7 @@ import 'package:calori_fit/Widgets/PaintedArc.dart';
 import 'package:calori_fit/Widgets/ProfileScreenOption.dart';
 import 'package:calori_fit/resources/auth.dart';
 import 'package:calori_fit/screens/editprofilescreen.dart';
+import 'package:calori_fit/screens/launchscreen.dart';
 import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/screens/mainsettings.dart';
 import 'package:calori_fit/screens/onboarding.dart';
@@ -27,8 +28,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void signOut(){
     AuthMethods amo = AuthMethods();
     amo.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const OnboardingScreen()));
-    Navigator.of(context).pop();
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+      builder: (context) => const LaunchScreen()), 
+      (Route<dynamic> route) => false);
   }
 
   void getName(){
@@ -49,6 +51,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     getName();
+    int calGoal = context.read<Providers>().getUser.calorieGoal;
+    int todaysCals = context
+        .watch<Providers>()
+        .getUser
+        .meals
+        .fold(0, (sum, meal) => sum + meal.calorieCount);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.08),
       child: Column(
@@ -61,12 +69,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  const CustomPaint(
-                    size: Size(130,130),
+                  CustomPaint(
+                    size: const Size(130,130),
                     painter: GradientArcPainter(
-                      progress: 0.75, 
+                      progress: todaysCals/calGoal > 1? 1 : todaysCals/calGoal, 
                       startColor: maingreen, 
-                      endColor: Color(0xFFFF798E), 
+                      endColor: const Color(0xFFFF798E), 
                       width: 5
                     )
                   ),

@@ -123,9 +123,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         profilepic: profilepic!);
     if (result == 'success' && context.mounted) {
       context.read<Providers>().refreshUser();
-      Navigator.of(context).pop();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const GenderScreen()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+        builder: (context) => const GenderScreen()), 
+        (Route<dynamic> route) => false);
     }
   }
 

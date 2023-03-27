@@ -37,19 +37,24 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
+    if(context.mounted){
+      context.read<Providers>().refreshUser();
+    }
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
+      isLoading = false;
       homescreens = [
         const HomeScreen(),
         const AchievementScreen(),
         const ProfileScreen(),
       ];
-      isLoading = false;
     });
   }
 
   @override
   void initState() {
     // TODO: implement initState
+    setUser(context);
     super.initState();
     _pageController = PageController();
     homescreens = [
@@ -67,7 +72,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    setUser(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
