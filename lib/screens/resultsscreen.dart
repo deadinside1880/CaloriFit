@@ -17,12 +17,11 @@ import '../models/Meal.dart';
 import '../resources/providers.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({
-    super.key,
-    required this.mealType,
-    required this.food,
-    required this.image
-    });
+  const ResultScreen(
+      {super.key,
+      required this.mealType,
+      required this.food,
+      required this.image});
   final File image;
   final String mealType;
   final String food;
@@ -89,16 +88,52 @@ class _ResultScreenState extends State<ResultScreen> {
                     isLastOption:true, 
                     cals: snapshot.data!.docs[0]['calories'], 
                     ),
-                  const SizedBox(height: 20,),
-                  const Text("Feel these are not accurate? Please let us know!", style: TextStyle(),)
-                ],
-              ),
-            );
-          }else{
-            return const Loader();
-          }
-        }
-      ),
+                    Text(
+                      widget.mealType,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        // fontFamrily: 'IntegralCF',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Image.file(
+                        widget.image,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Based on our AI engine, we have identified the following food items:",
+                      style: TextStyle(),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    IDResultsTile(
+                      meal: widget.food,
+                      isLastOption: true,
+                      cals: snapshot.data!.docs[0]['calories'],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Feel these are not accurate? Please let us know!",
+                      style: TextStyle(),
+                    )
+                  ],
+                ),
+              );
+            } else {
+              return const Loader();
+            }
+          }),
     );
   }
 }

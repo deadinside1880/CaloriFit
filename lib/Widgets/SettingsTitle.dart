@@ -16,6 +16,7 @@ class SettingsTitle extends StatelessWidget {
         GestureDetector(
           onTap: () {
             if (isResultScreen) {
+              // Navigator.of(context).pop();
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const Home()));
             } else {

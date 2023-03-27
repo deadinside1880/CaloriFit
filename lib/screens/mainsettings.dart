@@ -18,11 +18,11 @@ class MainSettings extends StatelessWidget {
           text: "Units of Measure", 
           isLastOption: false
         ),
-        ProfileScreenOption(
-          onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NotificationSettings())), 
-          text: "Notifications", 
-          isLastOption: true
-        ),
+        // ProfileScreenOption(
+        //   onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NotificationSettings())), 
+        //   text: "Notifications", 
+        //   isLastOption: true
+        // ),
       ],
     );
   }
