@@ -135,7 +135,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const Image(image: AssetImage("assets/Background3.png")),
+          // const Image(image: AssetImage("assets/bg3.png")),
+          ShaderMask(
+            shaderCallback: (rect) {
+              return const LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topLeft,
+                colors:[ Colors.transparent, Color.fromRGBO(28, 16, 24, 1)],
+              ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+            },
+            blendMode: BlendMode.dstIn,
+            child: Image.asset(
+              'assets/bg2.png',
+              // height: 400,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
           Container(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width / 20),

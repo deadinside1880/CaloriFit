@@ -17,7 +17,8 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
-  AssetImage image = const AssetImage('assets/Background.png');
+  AssetImage image = const AssetImage('assets/bg1.png');
+  String imgp = 'assets/bg1.png';
   bool state = false;
   String txt = 'ACTION IS THE KEY TO ALL SUCCESS';
   @override
@@ -27,9 +28,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Stack(
           children: [
             AnimatedSwitcher(
-                duration: const Duration(seconds: 5),
-                child: Image(
-                    image: image, width: MediaQuery.of(context).size.width)),
+              duration: const Duration(seconds: 5),
+              child: ShaderMask(
+                shaderCallback: (rect) {
+                  return const LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topLeft,
+                    colors: [Colors.transparent, Color.fromRGBO(28, 16, 24, 1)],
+                  ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+                },
+                blendMode: BlendMode.dstIn,
+                child: Image.asset(
+                  imgp,
+                  // height: 400,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ),
+            // Image(
+            //     image: image, width: MediaQuery.of(context).size.width)),
             Container(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width / 10),
@@ -41,8 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   const SizedBox(height: 75),
                   const CaloriFitSmallTitle(color: Colors.white),
                   Flexible(flex: 1, child: Container()),
-                  Text(txt,
-                      style: onboardingText, textAlign: TextAlign.center),
+                  Text(txt, style: onboardingText, textAlign: TextAlign.center),
                   const SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +94,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         } else {
                           setState(() {
                             state = true;
-                            image = const AssetImage('assets/Background2.png');
+                            image = const AssetImage('assets/bg2.png');
+                            imgp = 'assets/bg2.png';
                             txt = 'Progress starts with taking action.';
                             return;
                           });
