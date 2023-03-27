@@ -42,8 +42,7 @@ class _AgeSelectorScreenState extends State<AgeSelectorScreen> {
             const SizedBox(height: 10,),
             WheelScroller(setValue: (value) => updateAge(value), minimum: 15, maximum: 70, lineWidth: 90, text: "",),
             Flexible(flex: 1, child: Container()),
-            InfoSelectionBottom(Screen: "AGESCREEN", nextScreen: WeightSelector(), age: _age,),
-            GestureDetector( onTap: () => {}, child: Container( height: 20, width: 20, color: maingreen,),),
+            InfoSelectionBottom(Screen: "AGESCREEN", nextScreen: const WeightSelector(), age: _age,),
             SizedBox(height: MediaQuery.of(context).size.height/10,)
           ],
         ),

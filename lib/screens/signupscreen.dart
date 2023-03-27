@@ -133,6 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 image: AssetImage("assets/DefaultPP.png"))
                             : CircleAvatar(
                                 backgroundImage: FileImage(profilepic!),
+                          radius: 50,
                               ),
                         IconButton(
                             onPressed: () => selectImage(),
