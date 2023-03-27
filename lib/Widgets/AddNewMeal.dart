@@ -1,14 +1,17 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:image/image.dart' as img;
 import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/MealButton.dart';
 import 'package:calori_fit/Widgets/SettingsTitle.dart';
-import 'package:calori_fit/screens/processingimage.dart';
+// import 'package:calori_fit/screens/processingimage.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../resources/classifier.dart';
+import '../screens/resultsscreen.dart';
 
 class AddNewMealWidget extends StatefulWidget {
   final String meal;
@@ -22,6 +25,10 @@ class AddNewMealWidget extends StatefulWidget {
 class _AddNewMealWidgetState extends State<AddNewMealWidget> {
   bool isImgSelected = false;
   File? image;
+  bool isLoading = false;
+  late Classifier _classifier;
+  String? food;
+
   final ImagePicker _imagePicker = ImagePicker();
 
   void selectImage() async {
@@ -30,13 +37,38 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
       setState(() {
         image = File(im.path);
       });
-      if (context.mounted) {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ProcessingImageScreen(
-                  image: image!,
-                  meal: widget.meal,
-                )));
-      }
+      // if (context.mounted) {
+      //   Navigator.of(context).push(MaterialPageRoute(
+      //       builder: (context) => ProcessingImageScreen(
+      //             image: image!,
+      //             meal: widget.meal,
+      //           )));
+      // }
+      runInference();
+    }
+  }
+
+  void runInference() async {
+    /// Converting the image to a format that the model can understand.
+    img.Image imageInput = img.decodeImage(image!.readAsBytesSync())!;
+    _classifier = Classifier();
+    await _classifier.loadModel();
+    await _classifier.loadLabels();
+    var pred = _classifier.predict(imageInput);
+    setState(() {
+      food = pred;
+    });
+    // await Future.delayed(const Duration(seconds: 10));
+    if (context.mounted) {
+      setState(() {
+        isLoading = true;
+      });
+      await Future.delayed(const Duration(seconds: 2));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ResultScreen(
+              image: image!,
+              mealType: widget.meal,
+              food: food == null ? "" : food!)));
     }
   }
 
@@ -79,7 +111,7 @@ class _AddNewMealWidgetState extends State<AddNewMealWidget> {
                     // width: 100,
                     // height: 100,
                   )
-                : Container(height: 300, width: 300, child: Image.file(image!)),
+                : Container(child: Image.file(image!)),
             const SizedBox(
               height: 60,
             ),

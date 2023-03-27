@@ -24,7 +24,7 @@ class _GenderScreenState extends State<GenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
+        // padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/10),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,9 +90,9 @@ class _GenderScreenState extends State<GenderScreen> {
                   ),
                 ),
             ),
-            //Flexible(flex: 1, child: Container()),
+            Flexible(flex: 1, child: Container()),
             InfoSelectionBottom(Screen: 'GENDERSCREEN', nextScreen: const AgeSelectorScreen(), gender: _gender,),
-            // Flexible(flex: 1, child: Container()),
+            Flexible(flex: 1, child: Container()),
           ],
         ),
       ),

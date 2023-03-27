@@ -65,7 +65,7 @@ class User{
     photoURL : snapshot['photoURL'],
     height : snapshot['height'],
     meals : snapshot['meals'].isEmpty? [] : Meal.modelFromSnap(snapshot['meals']),
-    weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : snapshot['weeklyCalories'].map((calories) => calories as int).toList(),
+    weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : (snapshot['weeklyCalories'] as List).map((calories) => calories as int).toList(),
     currentStreak: snapshot['currentStreak'].toInt(),
     highestStreak: snapshot['highestStreak'].toInt()
     );

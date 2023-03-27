@@ -31,32 +31,36 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-
-  void updateMeal(int cals)async {
+  void updateMeal(int cals) async {
     bool exists = false;
-    MealType mealtype = widget.mealType == "Breakfast"? MealType.BREAKFAST : widget.mealType == "Lunch"? MealType.LUNCH : MealType.DINNER;
-    context.read<Providers>().getUser.meals.map((meal) => {
-      if(meal.mealType == mealtype) {
-        exists = true,
-        print("hello htere"),
-        print(meal.mealType),
-        print(mealtype)
+    MealType mealtype = widget.mealType == "Breakfast"
+        ? MealType.BREAKFAST
+        : widget.mealType == "Lunch"
+            ? MealType.LUNCH
+            : MealType.DINNER;
+    for (int i = 0; i < context.read<Providers>().getUser.meals.length;i++){
+      if (context.read<Providers>().getUser.meals[i].mealType == mealtype){
+        exists = true;
+        print("found duplicate");
       }
-      });
-    if(exists) {return;}
+    }
+      if (exists) {
+        return;
+      }
     print("after duplicate check");
-    context.read<Providers>().addMeal(Meal(mealType: mealtype, calorieCount: cals, meal: widget.mealType));
+    context.read<Providers>().addMeal(
+        Meal(mealType: mealtype, calorieCount: cals, meal: widget.mealType));
     updateWeekly(mealtype, cals);
     AuthMethods _amo = AuthMethods();
     await _amo.updateUser(context.watch<Providers>().getUser);
   }
 
-  void updateWeekly(MealType mealType, int cals){
+  void updateWeekly(MealType mealType, int cals) {
     List<int> weeklyCalories = context.read<Providers>().getUser.weeklyCalories;
-    if(mealType == MealType.BREAKFAST){
+    if (mealType == MealType.BREAKFAST) {
       weeklyCalories.add(cals);
-    }else{
-      weeklyCalories[weeklyCalories.length-1]+=cals;
+    } else {
+      weeklyCalories[weeklyCalories.length - 1] += cals;
     }
     context.read<Providers>().setWeeklyCals = weeklyCalories;
   }
@@ -65,33 +69,46 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection("foods").where("name", isEqualTo: widget.food).get(),
-        builder : (context, snapshot){
-          if(snapshot.hasData){
-            updateMeal(snapshot.data!.docs[0]['calories']);
-            return Container(
-              padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height/20, 
-                horizontal: MediaQuery.of(context).size.width/20
-              ),
-              child: Column(
-                children: [
-                  SettingsTitle(text: widget.mealType, isResultScreen: true,),
-                  const SizedBox(height: 20,),
-                  Container(
-                    child: Image.file(widget.image,),
-                  ),
-                  SizedBox(height: 20,),
-                  const Text(
-                    "Based on our AI engine, we have identified the following food items:", 
-                    style: TextStyle(), 
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10,),
-                  IDResultsTile(
-                    meal: widget.food, 
-                    isLastOption:true, 
-                    cals: snapshot.data!.docs[0]['calories'], 
+          future: FirebaseFirestore.instance
+              .collection("foods")
+              .where("name", isEqualTo: widget.food)
+              .get(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              updateMeal(snapshot.data!.docs[0]['calories']);
+              return Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height / 20,
+                    horizontal: MediaQuery.of(context).size.width / 20),
+                child: Column(
+                  children: [
+                    SettingsTitle(
+                      text: widget.mealType,
+                      isResultScreen: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Image.file(
+                        widget.image,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Based on our AI engine, we have identified the following food items:",
+                      style: TextStyle(),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    IDResultsTile(
+                      meal: widget.food,
+                      isLastOption: true,
+                      cals: snapshot.data!.docs[0]['calories'],
                     ),
                     const Text(
                       "Feel these are not accurate? Please let us know!",
