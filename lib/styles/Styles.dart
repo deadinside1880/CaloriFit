@@ -13,4 +13,10 @@ const buttonShapeDecor = ShapeDecoration(color: maingreen, shape: RoundedRectang
 
 const String firegif = "https://media.tenor.com/FLSfdrF_AhsAAAAC/blue-fire-calatop-blue-fire.gif";
 
+const errors = {
+  'email-already-exists' : 'This email is already in use',
+  'invalid-email' : 'This email is invalid',
+  'user-not-found' : 'This email address has not been registered'
+};
+
 //https://media4.giphy.com/media/JoV6rEAzVhWwjx2yCL/200w.gif?cid=6c09b952lc6harzoj3v2c1untdiau23re0d3badly13lium6&rid=200w.gif&ct=g

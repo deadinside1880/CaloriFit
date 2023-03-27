@@ -17,7 +17,11 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailEmpty = true;
   bool isEmailValid = true;
-  AssetImage image = const AssetImage('assets/Background.png');
+  Image image = const Image(
+                  key: ValueKey(1),
+                  image: AssetImage('assets/Background.png'), 
+                  width: double.infinity);
+  //AssetImage image = const AssetImage('assets/Background.png');
   bool state = false;
   String txt = 'ACTION IS THE KEY TO ALL SUCCESS';
   @override
@@ -27,9 +31,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Stack(
           children: [
             AnimatedSwitcher(
-                duration: const Duration(seconds: 5),
-                child: Image(
-                    image: image, width: MediaQuery.of(context).size.width)),
+                duration: const Duration(seconds: 1),
+                child: image
+                ),
             Container(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width / 10),
@@ -78,7 +82,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         } else {
                           setState(() {
                             state = true;
-                            image = const AssetImage('assets/Background2.png');
+                            image = const Image(
+                              key: ValueKey(2),
+                              image: AssetImage('assets/Background2.png'), 
+                              width: double.infinity);
                             txt = 'Progress starts with taking action.';
                             return;
                           });

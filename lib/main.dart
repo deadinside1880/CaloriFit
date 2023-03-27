@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             if(snapshot.connectionState == ConnectionState.waiting){
               return const Loader();
             }
-            return const Home();
+            return const LaunchScreen();
           },
         )
       ),

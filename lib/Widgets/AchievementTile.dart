@@ -11,7 +11,7 @@ class AchievementTile extends StatefulWidget {
     required this.achievement
     });
 
-  final achievement;
+  final Achievement achievement;
 
   @override
   State<AchievementTile> createState() => _AchievementTileState();
@@ -47,7 +47,13 @@ class _AchievementTileState extends State<AchievementTile> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(backgroundImage: NetworkImage(widget.achievement.photoURL), radius: 35,),
+            Hero(
+              tag: 'trial${widget.achievement.id}',
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(widget.achievement.photoURL), 
+                radius: 35,
+                )
+              ),
             const SizedBox(width: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

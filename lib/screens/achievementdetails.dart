@@ -47,9 +47,12 @@ class AchievementDetails extends StatelessWidget {
             const SizedBox(height: 10,),
             Text(achievement.title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
             SizedBox(height: MediaQuery.of(context).size.height/10,),
-            CircleAvatar(
-              backgroundImage: NetworkImage(achievement.photoURL),
-              radius: 150,
+            Hero(
+              tag: 'trial${achievement.id}',
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(achievement.photoURL),
+                radius: 150,
+              ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height/10,),
             const Text("CONGRATULATIONS!!!"),

@@ -68,11 +68,16 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => const Home()), 
         (Route<dynamic> route) => false);
     }else{
-      setState(() {
-        passwordError = res;
+      parseError(res);
+    }
+  }
+
+  void parseError(String res){
+    setState(() {
+
+        passwordError = errors[res]!;
         isPasswordWrong = true;
       });
-    }
   }
 
   @override
@@ -216,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 10,),
                       Visibility(
                         visible: isPasswordWrong,
-                        child: Text(passwordError)),
+                        child: Text(passwordError, style: const TextStyle(color: Colors.red),)),
                       const SizedBox(
                         height: 10,
                       ),
