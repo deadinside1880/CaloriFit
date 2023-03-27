@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:isoweek/isoweek.dart';
 
 import '../Widgets/MealButton.dart';
 import '../models/Meal.dart';
@@ -48,6 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  LinearGradient get _gradient => const LinearGradient(
+        colors: [
+          maingreen,
+          Color.fromRGBO(86, 200, 100, 1),
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+      
   @override
   Widget build(BuildContext context) {
     int todaysCals = context
@@ -56,8 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
         .meals
         .fold(0, (sum, meal) => sum + meal.calorieCount);
     setMeals();
-
+    Week currentWeek = Week.current();
+    // print(currentWeek.days[0].toString().split(' ')[0]);
+    String wkstart = DateFormat('d MMM yyyy').format(currentWeek.days[0]);
+    String wkend = DateFormat('d MMM yyyy').format(currentWeek.days[6]);
+    String wk = wkstart + ' - ' + wkend;
     String fullname = context.read<Providers>().getUser.name;
+    int limit_cals = context.read<Providers>().getUser.calorieGoal;
+    print("limit of calories for this user:$limit_cals");
     String _firstName;
     int idx = fullname.indexOf(" ");
     if (idx > 0) {
@@ -116,11 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 alignment: Alignment.center,
                                 children: [
                                   CircularPercentIndicator(
+                                    linearGradient: _gradient,
+                                    rotateLinearGradient: true,
                                     radius:
-                                        MediaQuery.of(context).size.width / 3.2,
-                                    lineWidth: 18,
+                                        MediaQuery.of(context).size.width / 3,
+                                    lineWidth: 11,
                                     backgroundColor: const Color(0xFF7F7F7F),
-                                    progressColor: maingreen,
+                                    // progressColor: maingreen,
                                     percent: context
                                                 .watch<Providers>()
                                                 .getUser
@@ -152,14 +170,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         "Today",
                                         style: TextStyle(
                                             fontSize: 22,
+                                            fontFamily: 'IntegralCF',
                                             color: Color.fromRGBO(
                                                 255, 255, 255, 0.6)),
                                       ),
                                       FittedBox(
                                           child: Text(
-                                        "$todaysCals cal",
+                                        "$todaysCals cals",
                                         style: const TextStyle(
-                                            fontSize: 48,
+                                            fontFamily: 'IntegralCF',
+                                            fontSize: 38,
                                             fontWeight: FontWeight.w600),
                                       ))
                                     ],
@@ -170,7 +190,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 weeklyCalories: context
                                     .read<Providers>()
                                     .getUser
-                                    .weeklyCalories)),
+                                    .weeklyCalories,
+                                wk_lst: wk,
+                                limit: limit_cals,
+                              )),
                   ),
                   const SizedBox(
                     height: 10,
