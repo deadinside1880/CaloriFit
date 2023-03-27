@@ -80,7 +80,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height/10),
-                const Center(child: CaloriFitTitle(color: Color.fromRGBO(255, 255, 255, 0.5))),
+                // const Center(
+                //     child: CaloriFitTitle(
+                //         color: Color.fromRGBO(255, 255, 255, 0.5))),
+                const Center(
+                  child: Text(
+                    "CaloriFit",
+                    style: onboardingSmallText,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
                 Flexible(flex:1, child: Container()),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,13 +124,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     )
                   ],
                 ),
-                const Text("Name", textAlign: TextAlign.start,),
+                const Text("Name", textAlign: TextAlign.start,
+                  style: TextStyle(color: maingreen),
+                ),
                 TextInputField( tec: _nameController, tit: TextInputType.text),
-                const Text("Email", textAlign: TextAlign.start,),
+                const Text("Email", textAlign: TextAlign.start,  style: TextStyle(color: maingreen),
+                ),
                 TextInputField( tec: _emailController, tit: TextInputType.emailAddress),
-                const Text("Password", textAlign: TextAlign.start,),
+                const Text("Password", textAlign: TextAlign.start,  style: TextStyle(color: maingreen),
+                ),
                 TextInputField( tec: _passwordController, tit: TextInputType.text, isPass: true),
-                const Text("Re-enter Password", textAlign: TextAlign.start,),
+                const Text("Re-enter Password", textAlign: TextAlign.start,  style: TextStyle(color: maingreen),
+                ) ,
                 TextInputField( tec: _passwordAgainController, tit: TextInputType.text, isPass: true,),
                 Flexible(flex: 1, child: Container()),
                 Container(

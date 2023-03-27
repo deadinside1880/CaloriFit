@@ -83,7 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height/10,),
-                const Center(child: CaloriFitTitle(color: Colors.white)),
+                // const Center(child: CaloriFitTitle(color: Colors.white)),
+                      const Center(
+                        child: Text(
+                          "CaloriFit",
+                          style: onboardingSmallText,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
                 Flexible(flex:1,child: Container(),),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,11 +110,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                   ],
                 ),
-                const SizedBox(height: 10,),
-                const Text("Welcome back", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Colors.white),),
-                const SizedBox(height: 20,),
-                const Text("Log in to your account", style: TextStyle(fontSize: 20, color: Colors.white),),
-                SizedBox(height: MediaQuery.of(context).size.height/10,),
+                const SizedBox(height: 40,),
+                const Text("Welcome back", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Colors.white),),
+                const SizedBox(height: 5,),
+                const Text("Log in to your account", style: TextStyle(fontSize: 15, color: Colors.white),),
+                SizedBox(height: MediaQuery.of(context).size.height/25,),
                 const Text("Email", style: TextStyle(color: maingreen),),
                 Stack(
                   alignment: Alignment.centerRight,
