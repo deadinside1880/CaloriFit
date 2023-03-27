@@ -38,15 +38,15 @@ class _ResultScreenState extends State<ResultScreen> {
         : widget.mealType == "Lunch"
             ? MealType.LUNCH
             : MealType.DINNER;
-    for (int i = 0; i < context.read<Providers>().getUser.meals.length;i++){
-      if (context.read<Providers>().getUser.meals[i].mealType == mealtype){
+    for (int i = 0; i < context.read<Providers>().getUser.meals.length; i++) {
+      if (context.read<Providers>().getUser.meals[i].mealType == mealtype) {
         exists = true;
         print("found duplicate");
       }
     }
-      if (exists) {
-        return;
-      }
+    if (exists) {
+      return;
+    }
     print("after duplicate check");
     context.read<Providers>().addMeal(
         Meal(mealType: mealtype, calorieCount: cals, meal: widget.mealType));
@@ -82,12 +82,27 @@ class _ResultScreenState extends State<ResultScreen> {
                     horizontal: MediaQuery.of(context).size.width / 20),
                 child: Column(
                   children: [
-                    SettingsTitle(
-                      text: widget.mealType,
+                    const SettingsTitle(
+                      text: "Add New Meal",
                       isResultScreen: true,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
+                    ),
+                    Text(
+                      widget.mealType,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'IntegralCF',
+                      ),
+                    ),
+                    // SettingsTitle(
+                    //   text: widget.mealType,
+                    //   isResultScreen: true,
+                    // ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     Container(
                       child: Image.file(
@@ -98,22 +113,32 @@ class _ResultScreenState extends State<ResultScreen> {
                       height: 20,
                     ),
                     const Text(
-                      "Based on our AI engine, we have identified the following food items:",
-                      style: TextStyle(),
+                      "\nBased on our AI engine, we have identified the following food items:",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     IDResultsTile(
                       meal: widget.food,
                       isLastOption: true,
                       cals: snapshot.data!.docs[0]['calories'],
                     ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Flexible(flex: 1, child: Container()),
                     const Text(
                       "Feel these are not accurate? Please let us know!",
-                      style: TextStyle(),
-                    )
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               );

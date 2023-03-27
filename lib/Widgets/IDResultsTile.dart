@@ -36,7 +36,7 @@ class IDResultsTile extends StatelessWidget {
           children:[
             Text(meal, style: const TextStyle(fontSize: 18),),
             Flexible(child: Container()),
-            Text("$cals cal/serving", style: const TextStyle(fontSize: 18),)
+            Text(" $cals cals/serving", style: const TextStyle(fontSize: 18),)
           ],
         ),
       ),
