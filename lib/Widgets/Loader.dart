@@ -8,15 +8,17 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("assets/loading-gif.gif"),
-          Text("Burning Calories")
-        ],
-      )
-    );
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/loading-gif.gif"),
+            const Text(
+              "Burning Calories",
+              style: TextStyle(fontFamily: 'IntegralCF'),
+            )
+          ],
+        ));
   }
 }

@@ -129,7 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             context
                                                 .watch<Providers>()
                                                 .getUser
-                                                .calorieGoal,
+                                                .calorieGoal >=1? 1: todaysCals /
+                                                context
+                                                    .watch<Providers>()
+                                                    .getUser
+                                                    .calorieGoal,
                                     circularStrokeCap: CircularStrokeCap.round,
                                     animation: true,
                                     animationDuration: 500,
