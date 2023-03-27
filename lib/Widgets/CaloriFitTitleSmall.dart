@@ -8,9 +8,14 @@ class CaloriFitSmallTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-                            "CaloriFit",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color),
-                             );
+      "CaloriFit",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: color,
+        fontFamily: 'IntegralCF',
+      ),
+    );
   }
 }

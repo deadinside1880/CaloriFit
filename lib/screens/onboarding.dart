@@ -19,10 +19,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isEmailValid = true;
   AssetImage image = const AssetImage('assets/Background.png');
   bool state = false;
-
+  String txt = 'ACTION IS THE KEY TO ALL SUCCESS';
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Container(
         child: Stack(
@@ -38,10 +37,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.width / 10),
+                  // SizedBox(height: MediaQuery.of(context).size.width / 10),
+                  const SizedBox(height: 75),
                   const CaloriFitSmallTitle(color: Colors.white),
                   Flexible(flex: 1, child: Container()),
-                  const Text("ACTION IS THE KEY TO ALL SUCCESS",
+                  Text(txt,
                       style: onboardingText, textAlign: TextAlign.center),
                   const SizedBox(height: 25),
                   Row(
@@ -79,6 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           setState(() {
                             state = true;
                             image = const AssetImage('assets/Background2.png');
+                            txt = 'Progress starts with taking action.';
                             return;
                           });
                         }

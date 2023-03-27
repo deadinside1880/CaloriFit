@@ -26,44 +26,48 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _emailController.addListener(_onKeyPressed);
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
   }
 
-  void _onKeyPressed(){
-      setState(() {
-        if(_emailController.text.isEmpty){
-          isEmailEmpty = true;
-        }else{
-          isEmailEmpty = false;
-        }
-        if(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_emailController.text)){
-          isCorrectEmail = true;
-        }else{
-          isCorrectEmail = false;
-        }
-      });
-    }
+  void _onKeyPressed() {
+    setState(() {
+      if (_emailController.text.isEmpty) {
+        isEmailEmpty = true;
+      } else {
+        isEmailEmpty = false;
+      }
+      if (RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(_emailController.text)) {
+        isCorrectEmail = true;
+      } else {
+        isCorrectEmail = false;
+      }
+    });
+  }
 
-  void login() async{
+  void login() async {
     AuthMethods amo = AuthMethods();
-    String res = await amo.signInUser(email: _emailController.text, password: _passwordController.text);
-    if(res == 'success' && context.mounted){
+    String res = await amo.signInUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'success' && context.mounted) {
       context.read<Providers>().refreshUser();
       setState(() {
         isLoading = true;
       });
       await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pop();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const Home()));
     }
   }
 
@@ -71,19 +75,21 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: isLoading?
-      const Loader()
-      :
-      Stack(
-        children: [
-          const Image(image: AssetImage("assets/Background2.png")),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: isLoading
+          ? const Loader()
+          : Stack(
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height/10,),
-                // const Center(child: CaloriFitTitle(color: Colors.white)),
+                const Image(image: AssetImage("assets/Background2.png")),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // SizedBox(height: MediaQuery.of(context).size.height/10,),
+                      const SizedBox(height: 75),
+
+                      // const Center(child: CaloriFitTitle(color: Colors.white)),
                       const Center(
                         child: Text(
                           "CaloriFit",
@@ -92,106 +98,168 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
 
-                // Flexible(flex:1,child: Container(),),
-                SizedBox(height: MediaQuery.of(context).size.height/8,),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        const Text("Log in"),
-                        const SizedBox(height: 5),
-                        Container(color: maingreen, width: 50, height: 5,)
-                      ],
-                    ),
-                    const SizedBox(width: 20,),
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpScreen())),
-                      child: const Text("Sign Up")
-                      )
-                  ],
-                ),
-                const SizedBox(height: 40,),
-                const Text("Welcome back", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Colors.white),),
-                const SizedBox(height: 5,),
-                const Text("Log in to your account", style: TextStyle(fontSize: 15, color: Colors.white),),
-                SizedBox(height: MediaQuery.of(context).size.height/20,),
-                const Text("Email", style: TextStyle(color: maingreen),),
-                Stack(
-                  alignment: Alignment.centerRight,
-                  children: [
-                    TextInputField(tec: _emailController, tit: TextInputType.emailAddress),
-                    Visibility(
-                      visible: isCorrectEmail && !isEmailEmpty,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        height: 30,
-                        width: 30,
-                        alignment: Alignment.topRight,
-                        decoration: ShapeDecoration(
-                          color: maingreen,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4))
-                            ),
-                        child: const Center(child: Icon(Icons.check_sharp, color: Colors.black,)),
-                      ),  
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20,),
-                const Text("Password", style: TextStyle(color: maingreen)),
-                const SizedBox(height: 5,),
-                Stack(
-                  alignment: Alignment.centerRight,
-                  children: [
-                    TextInputField(tec: _passwordController, tit: TextInputType.text, isPass: obscurePassword,),
-                    GestureDetector(
-                      onTap: () => setState(() {
-                        obscurePassword = !obscurePassword;
-                      }),
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        height: 30,
-                        width: 30,
-                        alignment: Alignment.topRight,
-                        child: const Icon(Icons.remove_red_eye_rounded),
+                      // Flexible(flex:1,child: Container(),),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 8,
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 10,),
-                Container(
-                  width: double.infinity,
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: const Text("Forgot Password", style: TextStyle(color: maingreen),),
-                  )
-                ),
-                Flexible(flex: 1, child: Container()),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/4 - 5),
-                  child: GestureDetector(
-                    onTap: login,
-                    child: Container(
-                      decoration: buttonShapeDecor,
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                           Text("Login", style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),),
-                           Icon(Icons.arrow_right_rounded, color: Colors.black,)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              const Text("Log in"),
+                              const SizedBox(height: 5),
+                              Container(
+                                color: maingreen,
+                                width: 50,
+                                height: 5,
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          GestureDetector(
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignUpScreen())),
+                              child: const Text("Sign Up"))
                         ],
                       ),
-                    ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const Text(
+                        "Welcome back",
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        "Log in to your account",
+                        style: TextStyle(fontSize: 15, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 20,
+                      ),
+                      const Text(
+                        "Email",
+                        style: TextStyle(color: maingreen),
+                      ),
+                      Stack(
+                        alignment: Alignment.centerRight,
+                        children: [
+                          TextInputField(
+                              tec: _emailController,
+                              tit: TextInputType.emailAddress),
+                          Visibility(
+                            visible: isCorrectEmail && !isEmailEmpty,
+                            child: Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              height: 30,
+                              width: 30,
+                              alignment: Alignment.topRight,
+                              decoration: ShapeDecoration(
+                                  color: maingreen,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4))),
+                              child: const Center(
+                                  child: Icon(
+                                Icons.check_sharp,
+                                color: Colors.black,
+                              )),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text("Password",
+                          style: TextStyle(color: maingreen)),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Stack(
+                        alignment: Alignment.centerRight,
+                        children: [
+                          TextInputField(
+                            tec: _passwordController,
+                            tit: TextInputType.text,
+                            isPass: obscurePassword,
+                          ),
+                          GestureDetector(
+                            onTap: () => setState(() {
+                              obscurePassword = !obscurePassword;
+                            }),
+                            child: Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              height: 30,
+                              width: 30,
+                              alignment: Alignment.topRight,
+                              child: const Icon(Icons.remove_red_eye_rounded),
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                          width: double.infinity,
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: const Text(
+                              "Forgot Password",
+                              style: TextStyle(color: maingreen),
+                            ),
+                          )),
+                      Flexible(flex: 1, child: Container()),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width / 4 - 5),
+                        child: GestureDetector(
+                          onTap: login,
+                          child: Container(
+                            decoration: buttonShapeDecor,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Icon(
+                                  Icons.arrow_right_rounded,
+                                  color: Colors.black,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 10,
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 10,)
+                )
               ],
             ),
-          )
-        ],
-      ),
     );
   }
 }

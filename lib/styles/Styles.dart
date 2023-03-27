@@ -7,7 +7,7 @@ import './Colors.dart';
 const onboardingText =
     TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'IntegralCF');
 const onboardingSmallText =
-    TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white);
+    TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white, fontFamily: 'IntegralCF');
 
 const buttonShapeDecor = ShapeDecoration(color: maingreen, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(48))));
 

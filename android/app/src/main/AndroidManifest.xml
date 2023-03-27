@@ -2,7 +2,7 @@
     package="com.example.calori_fit">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="calori_fit"
+        android:label="CaloriFit"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
