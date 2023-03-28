@@ -2,6 +2,7 @@ import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/Loader.dart';
 import 'package:calori_fit/resources/providers.dart';
 import 'package:calori_fit/screens/profilescreen.dart';
+import 'package:calori_fit/screens/workoutscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    if(context.mounted){
+    if (context.mounted) {
       context.read<Providers>().refreshUser();
     }
     await Future.delayed(const Duration(seconds: 2));
@@ -47,6 +48,7 @@ class _HomeState extends State<Home> {
         const HomeScreen(),
         const AchievementScreen(),
         const ProfileScreen(),
+        const WorkoutScreen()
       ];
     });
   }
@@ -61,6 +63,7 @@ class _HomeState extends State<Home> {
       const HomeScreen(),
       const AchievementScreen(),
       const ProfileScreen(),
+      const WorkoutScreen()
     ];
   }
 
@@ -88,14 +91,16 @@ class _HomeState extends State<Home> {
               children: homescreens,
             ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 14,
-        unselectedFontSize: 12,
+        selectedFontSize: 10,
+        unselectedFontSize: 8,
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
               icon: SizedBox(
-                  height: 40,
+                  height: 50,
                   child: Icon(
                     Icons.home_rounded,
                     size: 30,
@@ -104,7 +109,7 @@ class _HomeState extends State<Home> {
               label: 'Home'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 40,
+                height: 50,
                 child: Icon(Icons.bar_chart_rounded,
                     size: 30,
                     color: _page == 1 ? green1 : const Color(0xFF505050)),
@@ -112,7 +117,7 @@ class _HomeState extends State<Home> {
               label: 'Achievements'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 40,
+                height: 50,
                 child: Icon(
                   Icons.person,
                   size: 30,
@@ -120,6 +125,16 @@ class _HomeState extends State<Home> {
                 ),
               ),
               label: 'Your Account'),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: 50,
+                child: Icon(
+                  Icons.fitness_center_rounded,
+                  size: 30,
+                  color: _page == 3 ? green1 : const Color(0xFF505050),
+                ),
+              ),
+              label: 'Workout'),
         ],
         onTap: pageTapped,
       ),
