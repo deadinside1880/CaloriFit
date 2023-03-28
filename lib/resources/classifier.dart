@@ -62,12 +62,12 @@ class Classifier {
 
   Future<void> loadLabels() async {
     labels = await FileUtil.loadLabels(_labelsFileName);
-    print(_labelsLength);
-    print(labels.length);
+    // print(_labelsLength);
+    // print(labels.length);
     if (labels.length == _labelsLength) {
-      print('Labels loaded successfully');
+      // print('Labels loaded successfully');
     } else {
-      print('Unable to load labels');
+      // print('Unable to load labels');
     }
   }
 
@@ -93,13 +93,13 @@ class Classifier {
 
     final pre = DateTime.now().millisecondsSinceEpoch - pres;
 
-    print('Time to load image: $pre ms');
+    // print('Time to load image: $pre ms');
 
     final runs = DateTime.now().millisecondsSinceEpoch;
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
     final run = DateTime.now().millisecondsSinceEpoch - runs;
 
-    print('Time to run inference: $run ms');
+    print('TIME TO RUN INFERENCE ON UPLOADED IMAGE: $run ms');
     var el = _outputBuffer.getDoubleList().reduce(max);
     int idx = _outputBuffer.getDoubleList().indexOf(el);
     food = labels[idx-1];

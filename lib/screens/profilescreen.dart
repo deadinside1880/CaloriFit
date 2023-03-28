@@ -21,31 +21,29 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   String _firstName = "SARAH";
   String _lastName = "WEGAN";
 
-  void signOut(){
+  void signOut() {
     AuthMethods amo = AuthMethods();
     amo.signOut();
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-      builder: (context) => const LaunchScreen()), 
-      (Route<dynamic> route) => false);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const LaunchScreen()),
+        (Route<dynamic> route) => false);
   }
 
-  void getName(){
+  void getName() {
     String fullname = context.read<Providers>().getUser.name;
     int idx = fullname.indexOf(" ");
     setState(() {
-      if(idx>0){
-        _firstName = fullname.substring(0,idx);
-        _lastName = fullname.substring(idx+1);
-      }else{
+      if (idx > 0) {
+        _firstName = fullname.substring(0, idx);
+        _lastName = fullname.substring(idx + 1);
+      } else {
         _firstName = fullname;
         _lastName = "";
       }
     });
-
   }
 
   @override
@@ -58,11 +56,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .meals
         .fold(0, (sum, meal) => sum + meal.calorieCount);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.08),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.08),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height/20,),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -70,45 +71,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 alignment: Alignment.center,
                 children: [
                   CustomPaint(
-                    size: const Size(130,130),
-                    painter: GradientArcPainter(
-                      progress: todaysCals/calGoal > 1? 1 : todaysCals/calGoal, 
-                      startColor: maingreen, 
-                      endColor: const Color(0xFFFF798E), 
-                      width: 5
-                    )
-                  ),
+                      size: const Size(130, 130),
+                      painter: GradientArcPainter(
+                          progress: todaysCals / calGoal > 1
+                              ? 1
+                              : todaysCals / calGoal,
+                          startColor: maingreen,
+                          endColor: const Color(0xFFFF798E),
+                          width: 5)),
                   CircleAvatar(
-                    backgroundImage: NetworkImage(context.read<Providers>().getUser.photoURL),
+                    backgroundImage: NetworkImage(
+                        context.read<Providers>().getUser.photoURL),
                     radius: 50,
-                    ),
+                  ),
                 ],
               ),
               Container(
                 height: 100,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: const BoxDecoration(
-                  border: Border(left: BorderSide( width: 1, color: grey))
-                ),
+                    border: Border(left: BorderSide(width: 1, color: grey))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text("Joined", style: TextStyle(color: lightgrey, fontSize: 18),),
-                    SizedBox(height: 10,),
-                    Text("2 months ago", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),)
+                    Text(
+                      "Joined",
+                      style: TextStyle(
+                          color: lightgrey,
+                          fontSize: 18,
+                          ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      "2 months ago",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                    )
                   ],
                 ),
               )
             ],
           ),
-          const SizedBox(height: 20,),
-          Text(_firstName, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),),
-          const SizedBox(height: 10,),
-          Text(_lastName, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700, fontFamily: 'IntegralCF'),),
-          const SizedBox(height: 50,),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            _firstName,
+            style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'IntegralCF'),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            _lastName,
+            style: const TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'IntegralCF'),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
           ProfileScreenOption(
-            onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EditProfileScreen())) , 
+            onPress: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const EditProfileScreen())),
             text: "Edit Profile",
             isLastOption: false,
           ),
@@ -116,23 +148,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 10,
           ),
           ProfileScreenOption(
-            onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen())), 
-            text: "About Us", 
-            isLastOption: false,),
+            onPress: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const PrivacyPolicyScreen())),
+            text: "About Us",
+            isLastOption: false,
+          ),
           const SizedBox(
             height: 10,
           ),
           ProfileScreenOption(
-            onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MainSettings())), 
-            text: "Settings", 
+            onPress: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MainSettings())),
+            text: "Settings",
             isLastOption: true,
           ),
           Flexible(flex: 1, child: Container()),
           GestureDetector(
             onTap: signOut,
-            child: const Text("Sign Out", style: TextStyle(color: Colors.red, fontSize: 20),),
+            child: const Text(
+              "Sign Out",
+              style: TextStyle(color: Colors.red, fontSize: 20),
+            ),
           ),
-          const SizedBox(height: 50,)
+          const SizedBox(
+            height: 50,
+          )
         ],
       ),
     );
