@@ -57,7 +57,7 @@ class AuthMethods{
     } catch (e){  
       res = "unknown failure";
     }
-    print("Log in signing up"+res);
+    // print("Log in signing up"+res);
     return res;
   }
 
@@ -74,7 +74,7 @@ class AuthMethods{
       res = "success";
     } on FirebaseAuthException catch(err){
       res = err.code;
-      print(res);
+      // print(res);
     } catch(e){
       res = "unknown failure";
     }
@@ -100,7 +100,7 @@ class AuthMethods{
       CollectionReference userRef = _fireStore.collection('users');
       userRef.doc(user.uid).set(user.toJSON());
       res = 'success';
-      print(res);
+      // print(res);
     } on FirebaseException catch(err){
       res = err.code;
       print(res);
@@ -108,7 +108,7 @@ class AuthMethods{
       print(e);
       res = 'unknownerror';
     }
-    print("Log in updating user"+res);
+    // print("Log in updating user"+res);
     return res;
   }
 

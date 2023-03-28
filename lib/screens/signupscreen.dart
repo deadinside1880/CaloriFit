@@ -123,9 +123,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         profilepic: profilepic!);
     if (result == 'success' && context.mounted) {
       context.read<Providers>().refreshUser();
-      Navigator.of(context).pop();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const GenderScreen()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+        builder: (context) => const GenderScreen()), 
+        (Route<dynamic> route) => false);
     }
   }
 
@@ -135,7 +135,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const Image(image: AssetImage("assets/Background3.png")),
+          // const Image(image: AssetImage("assets/bg3.png")),
+          ShaderMask(
+            shaderCallback: (rect) {
+              return const LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topLeft,
+                colors:[ Colors.transparent, Color.fromRGBO(28, 16, 24, 1)],
+              ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+            },
+            blendMode: BlendMode.dstIn,
+            child: Image.asset(
+              'assets/bg2.png',
+              // height: 400,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
           Container(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width / 20),
@@ -212,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textAlign: TextAlign.start,
                   style: TextStyle(color: maingreen),
                 ),
-                TextInputField(tec: _nameController, tit: TextInputType.text),
+                TextInputField(tec: _nameController, tit: TextInputType.text, helperText: 'Enter your name',),
                 const SizedBox(
                   height: 10,
                 ),
@@ -222,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: TextStyle(color: maingreen),
                 ),
                 TextInputField(
-                    tec: _emailController, tit: TextInputType.emailAddress),
+                    tec: _emailController, tit: TextInputType.emailAddress, helperText: 'Enter your email address',),
                 const SizedBox(
                   height: 10,
                 ),
@@ -235,7 +250,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextInputField(
                     tec: _passwordController,
                     tit: TextInputType.text,
-                    isPass: true),
+                    isPass: true,
+                    helperText: 'Enter your password'),
                 const SizedBox(
                   height: 10,
                 ),
@@ -248,6 +264,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   tec: _passwordAgainController,
                   tit: TextInputType.text,
                   isPass: true,
+                  helperText: 'Re-enter your password',
                 ),
                 const SizedBox(height: 10,),
                 Visibility(

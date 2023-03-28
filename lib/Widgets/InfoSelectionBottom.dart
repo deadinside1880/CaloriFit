@@ -81,9 +81,10 @@ class InfoSelectionBottom extends StatelessWidget {
                     User _user = context.read<Providers>().getUser;
                     _amo.updateUser(_user);
                     context.read<Providers>().refreshUser();
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => nextScreen));
-                    return;
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                      builder: (context) => nextScreen), 
+                      (Route<dynamic> route) => false);
+                                    return;
                   }
               }
               Navigator.of(context)

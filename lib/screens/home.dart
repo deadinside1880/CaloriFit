@@ -37,19 +37,24 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
+    if(context.mounted){
+      context.read<Providers>().refreshUser();
+    }
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
+      isLoading = false;
       homescreens = [
         const HomeScreen(),
         const AchievementScreen(),
         const ProfileScreen(),
       ];
-      isLoading = false;
     });
   }
 
   @override
   void initState() {
     // TODO: implement initState
+    setUser(context);
     super.initState();
     _pageController = PageController();
     homescreens = [
@@ -67,7 +72,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    setUser(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -84,36 +88,38 @@ class _HomeState extends State<Home> {
               children: homescreens,
             ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 14,
+        unselectedFontSize: 12,
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
         items: [
           BottomNavigationBarItem(
               icon: SizedBox(
-                  height: 50,
+                  height: 40,
                   child: Icon(
                     Icons.home_rounded,
                     size: 30,
-                    color: _page == 0 ? Colors.white : const Color(0xFF505050),
+                    color: _page == 0 ? green1 : const Color(0xFF505050),
                   )),
-              label: ''),
+              label: 'Home'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 50,
+                height: 40,
                 child: Icon(Icons.bar_chart_rounded,
                     size: 30,
-                    color: _page == 1 ? Colors.white : const Color(0xFF505050)),
+                    color: _page == 1 ? green1 : const Color(0xFF505050)),
               ),
-              label: ''),
+              label: 'Achievements'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 50,
+                height: 40,
                 child: Icon(
                   Icons.person,
                   size: 30,
-                  color: _page == 2 ? Colors.white : const Color(0xFF505050),
+                  color: _page == 2 ? green1 : const Color(0xFF505050),
                 ),
               ),
-              label: ''),
+              label: 'Your Account'),
         ],
         onTap: pageTapped,
       ),

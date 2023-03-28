@@ -55,6 +55,7 @@ dependencies:
         url: https://github.com/filofan1/tflite_flutter_helper.git
         ref: 783f15e5a87126159147d8ea30b98eea9207ac70
   horizontal_picker: ^1.2.0
+  isoweek: ^1.1.4
 
 dev_dependencies:
   flutter_launcher_icons: "^0.9.0"
