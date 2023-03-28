@@ -11,11 +11,11 @@ class CaloriFitTitle extends StatelessWidget {
       "CaloriFit",
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.bold,
-          color: color,
-          fontFamily: 'IntegralCF',
-          ),
+        fontSize: 40,
+        fontWeight: FontWeight.bold,
+        color: color,
+        fontFamily: 'IntegralCF',
+      ),
     );
   }
 }
