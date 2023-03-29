@@ -20,7 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int ShaderMaskKey = 1;
   Image image = const Image(
                   key: ValueKey(1),
-                  image: AssetImage('assets/Background.png'), 
+                  image: AssetImage('assets/bg1.png'), 
                   fit: BoxFit.fitWidth,);
   //AssetImage image = const AssetImage('assets/bg1.png');
   String imgp = 'assets/bg1.png';
@@ -98,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ShaderMaskKey = 2;
                             image = const Image(
                                 key: ValueKey(2),
-                                image: AssetImage('assets/Background2.png'), 
+                                image: AssetImage('assets/bg2.png'), 
                                 fit: BoxFit.fitWidth,);
                             state = true;
                             imgp = 'assets/bg2.png';

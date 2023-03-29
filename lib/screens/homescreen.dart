@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           break;
       }
-      print(meal.calorieCount);
+      // print(meal.calorieCount);
     }
   }
 
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
     String wk = wkstart + ' - ' + wkend;
     String fullname = context.read<Providers>().getUser.name;
     int limit_cals = context.read<Providers>().getUser.calorieGoal;
-    print("limit of calories for this user:$limit_cals");
+    // print("limit of calories for this user:$limit_cals");
     String _firstName;
     int idx = fullname.indexOf(" ");
     if (idx > 0) {
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var date = DateTime.now();
     String datestr = DateFormat('EEEE, d MMM yyyy').format(date);
-    print(datestr);
+    // print(datestr);
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width / 20),

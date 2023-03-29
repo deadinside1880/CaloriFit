@@ -22,7 +22,7 @@ class ProfileScreenOption extends StatelessWidget {
         border: Border(
           top: const BorderSide(
             width: 2,
-            color: grey
+            color: Colors.transparent
           ),
           bottom: BorderSide(
             width: isLastOption? 2: 0,

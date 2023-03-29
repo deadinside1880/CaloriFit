@@ -20,7 +20,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   late int limit;
 
   void setData() {
-    print(widget.weeklyCalories);
+    // print(widget.weeklyCalories);
     List<int> temp = [0, 0, 0, 0, 0, 0, 0];
     for (int i = 0; i < widget.weeklyCalories.length; i++) {
       temp[i] = widget.weeklyCalories[i];
@@ -150,10 +150,9 @@ class _BarChartWidgetState extends State<BarChartWidget> {
           ) {
             return BarTooltipItem(
                 rod.toY.round().toString(),
-                 TextStyle(
-                    color: rod.toY.toDouble() < limit
-                        ? Colors.cyan
-                        : Colors.red,
+                TextStyle(
+                    color:
+                        rod.toY.toDouble() < limit ? Colors.cyan : Colors.red,
                     fontWeight: FontWeight.bold));
           }));
 

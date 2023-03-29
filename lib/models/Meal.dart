@@ -15,7 +15,7 @@ class Meal{
   };
 
   static List<Meal> modelFromSnap(meals){
-    print(meals);
+    // print(meals);
     return (meals as List).map((thismeal) =>Meal(
       mealType: thismeal["mealType"] == 'BREAKFAST' ? MealType.BREAKFAST : thismeal["mealType"] == 'LUNCH' ? MealType.LUNCH : MealType.DINNER, 
       calorieCount: thismeal["calorieCount"], 
