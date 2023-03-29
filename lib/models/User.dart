@@ -19,6 +19,7 @@ class User{
   List<int> weeklyCalories;
   int currentStreak;
   int highestStreak;
+  Map<String,int> workouts;
 
   User({
     required this.uid,
@@ -33,7 +34,8 @@ class User{
     required this.meals,
     required this.weeklyCalories,
     required this.currentStreak,
-    required this.highestStreak
+    required this.highestStreak,
+    required this.workouts
   });
 
   Map<String,dynamic> toJSON() =>{
@@ -49,7 +51,8 @@ class User{
     'meals' : meals.map((meal) => meal.toJSON()).toList(),
     'weeklyCalories' : weeklyCalories,
     'currentStreak' : currentStreak,
-    'highestStreak' : highestStreak
+    'highestStreak' : highestStreak,
+    'workouts' : workouts
   };
 
   static User modelFromSnap(DocumentSnapshot snap){
@@ -67,7 +70,8 @@ class User{
     meals : snapshot['meals'].isEmpty? [] : Meal.modelFromSnap(snapshot['meals']),
     weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : (snapshot['weeklyCalories'] as List).map((calories) => calories as int).toList(),
     currentStreak: snapshot['currentStreak'].toInt(),
-    highestStreak: snapshot['highestStreak'].toInt()
+    highestStreak: snapshot['highestStreak'].toInt(),
+    workouts: snapshot['workouts']
     );
   }
 }

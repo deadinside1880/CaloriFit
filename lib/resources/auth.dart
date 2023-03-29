@@ -44,7 +44,8 @@ class AuthMethods{
         meals: [], 
         weeklyCalories: [],
         currentStreak: 0,
-        highestStreak: 0
+        highestStreak: 0,
+        workouts: {}
       );
 
       CollectionReference userRef = _fireStore.collection("users");

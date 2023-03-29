@@ -2,6 +2,7 @@ import 'package:calori_fit/Widgets/CaloriFitTitle.dart';
 import 'package:calori_fit/Widgets/Loader.dart';
 import 'package:calori_fit/resources/providers.dart';
 import 'package:calori_fit/screens/profilescreen.dart';
+import 'package:calori_fit/screens/workoutscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,7 @@ class _HomeState extends State<Home> {
     homescreens = [
       const HomeScreen(),
       const AchievementScreen(),
+      const WorkoutScreen(),
       const ProfileScreen(),
     ];
   }
@@ -113,10 +115,18 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: SizedBox(
                 height: 40,
+                child: Icon(Icons.fitness_center_rounded,
+                    size: 30,
+                    color: _page == 2 ? green1 : const Color(0xFF505050)),
+              ),
+              label: 'Workouts'),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: 40,
                 child: Icon(
                   Icons.person,
                   size: 30,
-                  color: _page == 2 ? green1 : const Color(0xFF505050),
+                  color: _page == 3 ? green1 : const Color(0xFF505050),
                 ),
               ),
               label: 'Your Account'),

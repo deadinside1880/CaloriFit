@@ -11,29 +11,6 @@ import 'package:provider/provider.dart';
 
 class AchievementScreen extends StatelessWidget {
   const AchievementScreen({super.key});
-
-  static const achievements = [
-    {
-      'title' : 'Quarter Manager',
-      'description' : '3 months streak',
-      'progress' : 0.33
-    },
-    {
-      'title' : 'B2B Months Success',
-      'description' : '2 months streak',
-      'progress' : 0.67
-    },
-    {
-      'title' : 'Monthly Routine',
-      'description' : '1 month streak',
-      'progress' : 1
-    },
-    {
-      'title' : 'More than a week',
-      'description' : '8 days streak',
-      'progress' : 1
-    }
-  ];
   
   @override
   Widget build(BuildContext context) {
