@@ -10,7 +10,7 @@ class Workout{
 
   static Workout modelFromSnap(DocumentSnapshot snapshot){
     return Workout(
-      calsPerMin: snapshot['calsPerMin'], 
+      calsPerMin: snapshot['calsPerMin'].toDouble(), 
       id: snapshot['id'], 
       name: snapshot['name']
     );

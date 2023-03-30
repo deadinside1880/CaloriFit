@@ -40,6 +40,7 @@ class _HomeState extends State<Home> {
     });
     if(context.mounted){
       context.read<Providers>().refreshUser();
+      context.read<Providers>().initWorkouts();
     }
     await Future.delayed(const Duration(seconds: 2));
     setState(() {
@@ -47,6 +48,7 @@ class _HomeState extends State<Home> {
       homescreens = [
         const HomeScreen(),
         const AchievementScreen(),
+        const WorkoutScreen(),
         const ProfileScreen(),
       ];
     });
@@ -75,6 +77,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,

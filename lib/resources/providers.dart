@@ -1,3 +1,4 @@
+import 'package:calori_fit/models/Workout.dart';
 import 'package:calori_fit/models/enums.dart';
 import 'package:calori_fit/resources/auth.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,12 @@ import '../models/User.dart';
 
 class Providers extends ChangeNotifier{
   final AuthMethods _amo = AuthMethods();
-  User? _user; 
+  User? _user;
+  List<Workout>? _workouts; 
 
   User get getUser => _user!;
+
+  List<Workout> get getWorkouts => _workouts!;
 
   set setGender (Genders gender) {
     _user!.gender = gender;
@@ -61,9 +65,20 @@ class Providers extends ChangeNotifier{
     notifyListeners();
   }
 
+  void addWorkout(String id, int mins){
+    _user!.workouts[id] = mins;
+    notifyListeners();
+  }
+
   Future<void> refreshUser() async{
     User user = await _amo.getUserDetails();
     _user = user;
+    notifyListeners();
+  }
+
+  Future<void> initWorkouts() async{
+    List<Workout> workouts = await _amo.getWorkouts();
+    _workouts = workouts;
     notifyListeners();
   }
 }

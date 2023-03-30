@@ -24,6 +24,10 @@ class _AchievementTileState extends State<AchievementTile> {
     });
   }
 
+  // Widget heroAnimation (flightContext, animation, flightDirection, fromHeroContext, toHeroContext) {
+  //   return Transform.
+  // }
+
   @override
   Widget build(BuildContext context) {
     double progress = context.read<Providers>().getUser.highestStreak /
@@ -46,6 +50,7 @@ class _AchievementTileState extends State<AchievementTile> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Hero(
+                // flightShuttleBuilder: heroAnimation,
                 tag: 'trial${widget.achievement.id}',
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(widget.achievement.photoURL),

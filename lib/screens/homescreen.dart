@@ -10,6 +10,7 @@ import 'package:isoweek/isoweek.dart';
 
 import '../Widgets/MealButton.dart';
 import '../models/Meal.dart';
+import '../models/Workout.dart';
 import '../styles/Colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Meal? breakfast;
   Meal? lunch;
   Meal? dinner;
+  double _burntCals = 0;
 
   setMeals() {
     List<Meal> meals = context.read<Providers>().getUser.meals;
@@ -49,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  LinearGradient get _gradient => const LinearGradient(
+  LinearGradient get _calConsumedGradient => const LinearGradient(
         colors: [
           maingreen,
           Color.fromRGBO(86, 200, 100, 1),
@@ -57,7 +59,35 @@ class _HomeScreenState extends State<HomeScreen> {
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
       );
-      
+
+  LinearGradient get _calBurntGradient => LinearGradient(
+        colors: [
+          Colors.red,
+          Colors.red.shade300,
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+
+  void getBurntCals(){
+    print(context.read<Providers>().getUser.workouts);
+    context.read<Providers>().getUser.workouts.entries.map((entry) {
+      for(Workout workout in context.read<Providers>().getWorkouts){
+        if(entry.key == workout.id){
+          _burntCals += workout.calsPerMin * entry.value;
+          print(workout.calsPerMin);
+        }
+      }
+    });
+  }
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getBurntCals();
+  }
+
   @override
   Widget build(BuildContext context) {
     int todaysCals = context
@@ -132,31 +162,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                 alignment: Alignment.center,
                                 children: [
                                   CircularPercentIndicator(
-                                    linearGradient: _gradient,
+                                    linearGradient: _calConsumedGradient,
                                     rotateLinearGradient: true,
                                     radius:
                                         MediaQuery.of(context).size.width / 3,
                                     lineWidth: 11,
                                     backgroundColor: const Color(0xFF7F7F7F),
                                     // progressColor: maingreen,
-                                    percent: context
-                                                .watch<Providers>()
-                                                .getUser
-                                                .calorieGoal ==
-                                            0
+                                    percent: limit_cals == 0
                                         ? 0
-                                        : todaysCals /
-                                                    context
-                                                        .watch<Providers>()
-                                                        .getUser
-                                                        .calorieGoal >=
-                                                1
+                                        : todaysCals / limit_cals >= 1
                                             ? 1
-                                            : todaysCals /
-                                                context
-                                                    .watch<Providers>()
-                                                    .getUser
-                                                    .calorieGoal,
+                                            : todaysCals / limit_cals,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    animation: true,
+                                    animationDuration: 500,
+                                  ),
+                                  CircularPercentIndicator(
+                                    linearGradient: _calBurntGradient,
+                                    rotateLinearGradient: true,
+                                    radius:
+                                        MediaQuery.of(context).size.width / 3 - 30,
+                                    lineWidth: 11,
+                                    backgroundColor: const Color(0xFF7F7F7F),
+                                    // progressColor: maingreen,
+                                    percent: limit_cals == 0
+                                        ? 0
+                                        : _burntCals / limit_cals >= 1
+                                            ? 1
+                                            : _burntCals / limit_cals,
                                     circularStrokeCap: CircularStrokeCap.round,
                                     animation: true,
                                     animationDuration: 500,

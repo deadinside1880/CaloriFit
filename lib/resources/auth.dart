@@ -3,6 +3,7 @@ import 'dart:core';
 import 'dart:io';
 import 'package:calori_fit/resources/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/Workout.dart';
 import '../models/enums.dart';
 import 'store.dart';
 import 'package:calori_fit/models/User.dart' as model;
@@ -111,6 +112,11 @@ class AuthMethods{
     }
     // print("Log in updating user"+res);
     return res;
+  }
+
+  Future<List<Workout>> getWorkouts() async{
+   QuerySnapshot snapshot = await _fireStore.collection("workouts").orderBy('name', descending: true).get();
+   return snapshot.docs.map((snap) => Workout.modelFromSnap(snap)).toList();
   }
 
 }

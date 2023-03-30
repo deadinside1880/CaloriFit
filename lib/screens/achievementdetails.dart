@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:wc_flutter_share/wc_flutter_share.dart';
 
 import '../styles/Colors.dart';
@@ -59,9 +60,15 @@ class AchievementDetails extends StatelessWidget {
             ),
             Hero(
               tag: 'trial${achievement.id}',
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(achievement.photoURL),
-                radius: 150,
+              child: ClipOval(
+                child: Shimmer(
+                  duration: const Duration(seconds: 2),
+                  direction: const ShimmerDirection.fromLBRT(),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(achievement.photoURL),
+                    radius: 150,
+                  ),
+                ),
               ),
             ),
             SizedBox(
