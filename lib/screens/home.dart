@@ -95,6 +95,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,
         unselectedFontSize: 12,
+        // type: BottomNavigationBarType.fixed, # UP FOR DEBATE
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
         items: [
