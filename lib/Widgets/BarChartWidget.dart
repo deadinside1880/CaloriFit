@@ -37,9 +37,14 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                     gradient: widget.limit > entry.value.toDouble()
                         ? _barsGradient
                         : _barsGradientRed),
-              ], showingTooltipIndicators: [
-                entry.value.toDouble() > 0 ? 0 : 1
-              ]))
+                // BarChartRodData(
+                //     toY: entry.value.toDouble(),
+                //     gradient: widget.limit > entry.value.toDouble()
+                //         ? _barsGradientRed
+                //         : _barsGradientRed)
+              ], showingTooltipIndicators: 
+                entry.value.toDouble() > 0 ? [0] : [-1]
+              ))
           .toList();
     });
   }
