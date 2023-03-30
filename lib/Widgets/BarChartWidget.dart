@@ -37,6 +37,11 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                     gradient: widget.limit > entry.value.toDouble()
                         ? _barsGradient
                         : _barsGradientRed),
+                BarChartRodData(
+                    toY: entry.value.toDouble()/2,
+                    gradient: widget.limit > entry.value.toDouble()
+                        ? _barsGradientRed
+                        : _barsGradientRed)
               ], showingTooltipIndicators: [
                 entry.value.toDouble() > 0 ? 0 : 1
               ]))
@@ -47,7 +52,6 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   LinearGradient get _barsGradientRed => const LinearGradient(
         colors: [
           Color.fromRGBO(255, 120, 150, 1),
-          // Colors.redAccent[900],
           Colors.red,
         ],
         begin: Alignment.bottomCenter,
@@ -63,14 +67,19 @@ class _BarChartWidgetState extends State<BarChartWidget> {
         end: Alignment.topCenter,
       );
 
+  LinearGradient get _barsGradient2 => const LinearGradient(
+        colors: [
+          Colors.red,
+          green3,
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+
   List<BarChartGroupData> get barGroups => [
         BarChartGroupData(
           x: 0,
           barRods: [
-            BarChartRodData(
-              toY: 8,
-              gradient: _barsGradient,
-            ),
             BarChartRodData(
               toY: 8,
               gradient: _barsGradient,
