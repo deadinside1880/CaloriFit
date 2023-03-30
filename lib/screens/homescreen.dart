@@ -69,18 +69,19 @@ class _HomeScreenState extends State<HomeScreen> {
         end: Alignment.topCenter,
       );
 
-  void getBurntCals(){
+  void getBurntCals() {
     print(context.read<Providers>().getUser.workouts);
-    context.read<Providers>().getUser.workouts.entries.map((entry) {
-      for(Workout workout in context.read<Providers>().getWorkouts){
-        if(entry.key == workout.id){
-          _burntCals += workout.calsPerMin * entry.value;
+    context.read<Providers>().getUser.workouts.map((key, value) {
+      for (Workout workout in context.read<Providers>().getWorkouts) {
+        if (key == workout.id) {
+          _burntCals += workout.calsPerMin * value;
           print(workout.calsPerMin);
         }
       }
+      return MapEntry(key, value);
     });
   }
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -182,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     linearGradient: _calBurntGradient,
                                     rotateLinearGradient: true,
                                     radius:
-                                        MediaQuery.of(context).size.width / 3 - 30,
+                                        MediaQuery.of(context).size.width / 3 -
+                                            30,
                                     lineWidth: 11,
                                     backgroundColor: const Color(0xFF7F7F7F),
                                     // progressColor: maingreen,
@@ -213,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         "$todaysCals cals",
                                         style: const TextStyle(
                                             fontFamily: 'IntegralCF',
-                                            fontSize: 38,
+                                            fontSize: 27,
                                             fontWeight: FontWeight.w600),
                                       ))
                                     ],

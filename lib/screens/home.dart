@@ -39,8 +39,8 @@ class _HomeState extends State<Home> {
       isLoading = true;
     });
     if(context.mounted){
-      context.read<Providers>().refreshUser();
-      context.read<Providers>().initWorkouts();
+      await context.read<Providers>().refreshUser();
+      await context.read<Providers>().initWorkouts();
     }
     await Future.delayed(const Duration(seconds: 2));
     setState(() {
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
               children: homescreens,
             ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 14,
+        selectedFontSize: 12,
         unselectedFontSize: 12,
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,

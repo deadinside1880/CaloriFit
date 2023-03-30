@@ -57,8 +57,7 @@ class User{
 
   static User modelFromSnap(DocumentSnapshot snap){
       var snapshot = snap.data() as Map<String, dynamic>;
-      Map<String, int> temp = {};
-      print(snapshot['workouts'].map((key, value) {temp[key.toString()] = value.toInt();}));
+
     return User(    
     uid : snapshot['uid'],
     name: snapshot['name'],
@@ -73,7 +72,7 @@ class User{
     weeklyCalories : snapshot['weeklyCalories'].isEmpty ? [] : (snapshot['weeklyCalories'] as List).map((calories) => calories as int).toList(),
     currentStreak: snapshot['currentStreak'].toInt(),
     highestStreak: snapshot['highestStreak'].toInt(),
-    workouts: snapshot['workouts'].map((key, value) => MapEntry(key.toString(), int.parse(value.toString()))) ?? {}
+    workouts: (snapshot['workouts'] as Map<String,dynamic>).map((key, value) => MapEntry(key, int.parse(value.toString()))) 
     );
   }
 }
