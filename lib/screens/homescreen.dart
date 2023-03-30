@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Meal? lunch;
   Meal? dinner;
   double _burntCals = 0;
-
+  int burnt = 0;
   setMeals() {
     List<Meal> meals = context.read<Providers>().getUser.meals;
     for (Meal meal in meals) {
@@ -75,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
       for (Workout workout in context.read<Providers>().getWorkouts) {
         if (key == workout.id) {
           _burntCals += workout.calsPerMin * value;
+          burnt = _burntCals.toInt();
           print(workout.calsPerMin);
         }
       }
@@ -166,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     linearGradient: _calConsumedGradient,
                                     rotateLinearGradient: true,
                                     radius:
-                                        MediaQuery.of(context).size.width / 3,
-                                    lineWidth: 11,
+                                        MediaQuery.of(context).size.width / 2.9,
+                                    lineWidth: 13,
                                     backgroundColor: const Color(0xFF7F7F7F),
                                     // progressColor: maingreen,
                                     percent: limit_cals == 0
@@ -177,15 +178,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             : todaysCals / limit_cals,
                                     circularStrokeCap: CircularStrokeCap.round,
                                     animation: true,
-                                    animationDuration: 500,
+                                    animationDuration: 600,
                                   ),
                                   CircularPercentIndicator(
                                     linearGradient: _calBurntGradient,
                                     rotateLinearGradient: true,
                                     radius:
-                                        MediaQuery.of(context).size.width / 3 -
-                                            30,
-                                    lineWidth: 11,
+                                        MediaQuery.of(context).size.width / 2.9 - 25,
+
+                                    lineWidth: 13,
                                     backgroundColor: const Color(0xFF7F7F7F),
                                     // progressColor: maingreen,
                                     percent: limit_cals == 0
@@ -195,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             : _burntCals / limit_cals,
                                     circularStrokeCap: CircularStrokeCap.round,
                                     animation: true,
-                                    animationDuration: 500,
+                                    animationDuration: 750,
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -205,19 +206,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const Text(
                                         "Today",
                                         style: TextStyle(
-                                            fontSize: 22,
+                                            fontSize: 16,
                                             fontFamily: 'IntegralCF',
                                             color: Color.fromRGBO(
                                                 255, 255, 255, 0.6)),
                                       ),
-                                      FittedBox(
-                                          child: Text(
-                                        "$todaysCals cals",
-                                        style: const TextStyle(
-                                            fontFamily: 'IntegralCF',
-                                            fontSize: 27,
-                                            fontWeight: FontWeight.w600),
-                                      ))
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                              child: Text(
+                                            "$todaysCals",
+                                            style: const TextStyle(
+                                                fontFamily: 'IntegralCF',
+                                                color: maingreen,
+                                                fontSize: 29,
+                                                fontWeight: FontWeight.w600),
+                                          )),
+                                          const FittedBox(
+                                              child: Text(
+                                            "/",
+                                            style: TextStyle(
+                                                fontFamily: 'IntegralCF',
+                                                color: Colors.white,
+                                                fontSize: 29,
+                                                fontWeight: FontWeight.w600),
+                                          )),
+                                          FittedBox(
+                                              child: Text(
+                                            "$burnt",
+                                            style: const TextStyle(
+                                                fontFamily: 'IntegralCF',
+                                                color: Colors.red,
+                                                fontSize: 29,
+                                                fontWeight: FontWeight.w600),
+                                          )),
+                                        ],
+                                      ),
+                                      // FittedBox(
+                                      //     child: Text(
+                                      //   "$todaysCals/$burnt",
+                                      //   style: const TextStyle(
+                                      //       fontFamily: 'IntegralCF',
+                                      //       color: Colors.white,
+                                      //       fontSize: 29,
+                                      //       fontWeight: FontWeight.w600),
+                                      // )),
                                     ],
                                   ),
                                 ],
