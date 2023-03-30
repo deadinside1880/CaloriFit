@@ -95,13 +95,13 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,
         unselectedFontSize: 12,
-        // type: BottomNavigationBarType.fixed, # UP FOR DEBATE
+        type: BottomNavigationBarType.fixed,  //UP FOR DEBATE
         backgroundColor: const Color(0xFF1C1C1E),
         currentIndex: _page,
         items: [
           BottomNavigationBarItem(
               icon: SizedBox(
-                  height: 40,
+                  height: 50,
                   child: Icon(
                     Icons.home_rounded,
                     size: 30,
@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
               label: 'Home'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 40,
+                height: 50,
                 child: Icon(Icons.bar_chart_rounded,
                     size: 30,
                     color: _page == 1 ? green1 : const Color(0xFF505050)),
@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
               label: 'Achievements'),
           BottomNavigationBarItem(
               icon: SizedBox(
-                height: 40,
+                height: 50,
                 child: Icon(Icons.fitness_center_rounded,
                     size: 30,
                     color: _page == 2 ? green1 : const Color(0xFF505050)),
