@@ -70,6 +70,10 @@ class _BarChartWidgetState extends State<BarChartWidget> {
             BarChartRodData(
               toY: 8,
               gradient: _barsGradient,
+            ),
+            BarChartRodData(
+              toY: 8,
+              gradient: _barsGradient,
             )
           ],
           showingTooltipIndicators: [0],
