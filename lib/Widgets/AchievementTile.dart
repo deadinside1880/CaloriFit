@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:calori_fit/models/Achievement.dart';
 import 'package:calori_fit/resources/providers.dart';
 import 'package:calori_fit/screens/achievementdetails.dart';
@@ -24,9 +26,28 @@ class _AchievementTileState extends State<AchievementTile> {
     });
   }
 
-  // Widget heroAnimation (flightContext, animation, flightDirection, fromHeroContext, toHeroContext) {
-  //   return Transform.
-  // }
+  Widget heroAnimation (flightContext, animation, flightDirection, fromHeroContext, toHeroContext) {
+    return ScaleTransition(
+      scale: animation.drive(
+        Tween<double>(begin: 0.0, end: 1.0).chain(
+          CurveTween(
+            curve: const Interval(0.0, 1.0),
+            ),
+          ),
+      ),
+      child: toHeroContext.widget,
+    );
+    // return AnimatedContainer(
+    //   duration: const Duration(seconds: 2),
+    //   child: Transform(
+    //     transform: Matrix4.identity()
+    //       ..setEntry(3, 2, 0.001)
+    //       ..rotateY(pi/4),
+    //       alignment: Alignment.center,
+    //       child: toHeroContext.widget,
+    //   ),
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +71,7 @@ class _AchievementTileState extends State<AchievementTile> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Hero(
-                // flightShuttleBuilder: heroAnimation,
+                flightShuttleBuilder: heroAnimation,
                 tag: 'trial${widget.achievement.id}',
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(widget.achievement.photoURL),

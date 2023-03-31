@@ -132,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           // const Image(image: AssetImage("assets/bg3.png")),
@@ -151,159 +151,167 @@ class _SignUpScreenState extends State<SignUpScreen> {
               fit: BoxFit.fitWidth,
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // SizedBox(height: MediaQuery.of(context).size.height / 10),
-                const SizedBox(height: 75),
-                // const Center(
-                //     child: CaloriFitTitle(
-                //         color: Color.fromRGBO(255, 255, 255, 0.5))),
-                const Center(
-                  child: Text(
-                    "CaloriFit",
-                    style: onboardingSmallText,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                // Flexible(flex:1, child: Container()),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 8,
-                ),
-
-                Row(
+          SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height 
+              ),
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen())),
-                        child: const Text("Log in")),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        const Text("Sign Up"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          color: maingreen,
-                          width: 50,
-                          height: 5,
-                        )
-                      ],
-                    ),
-                    Flexible(
-                      child: Container(),
-                    ),
-                    Stack(
-                      clipBehavior: Clip.antiAlias,
-                      children: [
-                        profilepic == null
-                            ? const Image(
-                                image: AssetImage("assets/DefaultPP.png"))
-                            : CircleAvatar(
-                                backgroundImage: FileImage(profilepic!),
-                          radius: 50,
-                              ),
-                        IconButton(
-                            onPressed: () => selectImage(),
-                            icon: const Icon(Icons.camera_alt_rounded))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                  ],
-                ),
-
-                const Text(
-                  "Name",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: maingreen),
-                ),
-                TextInputField(tec: _nameController, tit: TextInputType.text, helperText: 'Enter your name',),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Email",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: maingreen),
-                ),
-                TextInputField(
-                    tec: _emailController, tit: TextInputType.emailAddress, helperText: 'Enter your email address',),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                const Text(
-                  "Password",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: maingreen),
-                ),
-                TextInputField(
-                    tec: _passwordController,
-                    tit: TextInputType.text,
-                    isPass: true,
-                    helperText: 'Enter your password'),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Re-enter Password",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: maingreen),
-                ),
-                TextInputField(
-                  tec: _passwordAgainController,
-                  tit: TextInputType.text,
-                  isPass: true,
-                  helperText: 'Re-enter your password',
-                ),
-                const SizedBox(height: 10,),
-                Visibility(
-                  visible: isError,
-                  child: Text(error, style: const TextStyle(color: Colors.red),)
-                ),
-                Flexible(flex: 1, child: Container()),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width / 4),
-                  child: GestureDetector(
-                    onTap: signUpUser,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 20),
-                      decoration: buttonShapeDecor,
-                      child: Row(
-                        children: const [
-                          Text(
-                            "Sign Up!",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.arrow_right_rounded,
-                            color: Colors.black,
-                          ),
-                        ],
+                    // SizedBox(height: MediaQuery.of(context).size.height / 10),
+                    const SizedBox(height: 75),
+                    // const Center(
+                    //     child: CaloriFitTitle(
+                    //         color: Color.fromRGBO(255, 255, 255, 0.5))),
+                    const Center(
+                      child: Text(
+                        "CaloriFit",
+                        style: onboardingSmallText,
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
+                    // Flexible(flex:1, child: Container()),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 8,
+                    ),
+                      
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen())),
+                            child: const Text("Log in")),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          children: [
+                            const Text("Sign Up"),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              color: maingreen,
+                              width: 50,
+                              height: 5,
+                            )
+                          ],
+                        ),
+                        Flexible(
+                          child: Container(),
+                        ),
+                        Stack(
+                          clipBehavior: Clip.antiAlias,
+                          children: [
+                            profilepic == null
+                                ? const Image(
+                                    image: AssetImage("assets/DefaultPP.png"))
+                                : CircleAvatar(
+                                    backgroundImage: FileImage(profilepic!),
+                              radius: 50,
+                                  ),
+                            IconButton(
+                                onPressed: () => selectImage(),
+                                icon: const Icon(Icons.camera_alt_rounded))
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                      ],
+                    ),
+                      
+                    const Text(
+                      "Name",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: maingreen),
+                    ),
+                    TextInputField(tec: _nameController, tit: TextInputType.text, helperText: 'Enter your name',),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Email",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: maingreen),
+                    ),
+                    TextInputField(
+                        tec: _emailController, tit: TextInputType.emailAddress, helperText: 'Enter your email address',),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                      
+                    const Text(
+                      "Password",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: maingreen),
+                    ),
+                    TextInputField(
+                        tec: _passwordController,
+                        tit: TextInputType.text,
+                        isPass: true,
+                        helperText: 'Enter your password'),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Re-enter Password",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: maingreen),
+                    ),
+                    TextInputField(
+                      tec: _passwordAgainController,
+                      tit: TextInputType.text,
+                      isPass: true,
+                      helperText: 'Re-enter your password',
+                    ),
+                    const SizedBox(height: 10,),
+                    Visibility(
+                      visible: isError,
+                      child: Text(error, style: const TextStyle(color: Colors.red),)
+                    ),
+                    Flexible(flex: 1, child: Container()),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 4),
+                      child: GestureDetector(
+                        onTap: signUpUser,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          decoration: buttonShapeDecor,
+                          child: Row(
+                            children: const [
+                              Text(
+                                "Sign Up!",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(
+                                Icons.arrow_right_rounded,
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height / 10)
+                  ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height / 10)
-              ],
+              ),
             ),
           )
         ],

@@ -66,7 +66,11 @@ class Providers extends ChangeNotifier{
   }
 
   void addWorkout(String id, int mins){
-    _user!.workouts[id] = mins;
+    _user!.workouts.update(
+      id,
+      (value) => value + mins,
+      ifAbsent: () => mins
+    );
     notifyListeners();
   }
 
