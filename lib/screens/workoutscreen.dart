@@ -46,6 +46,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     await _amo.updateUser(context.read<Providers>().getUser);
     dropdownController.clear();
     durationController.clear();
+    if(context.mounted){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("YAYY!! AMAZING WORK FOR COMPLETING THIS WORKOUT!!")));
+    }
   }
 
   @override
