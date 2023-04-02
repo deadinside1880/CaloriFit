@@ -44,11 +44,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     context.read<Providers>().addWorkout(nameToId[currentWorkout.name]!, duration);
     AuthMethods _amo = AuthMethods();
     await _amo.updateUser(context.read<Providers>().getUser);
+    await context.read<Providers>().refreshUser();
     dropdownController.clear();
     durationController.clear();
     if(context.mounted){
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("YAYY!! AMAZING WORK FOR COMPLETING THIS WORKOUT!!")));
+        content: Text("Well Done Completing this workout! Keep it up!")));
     }
   }
 

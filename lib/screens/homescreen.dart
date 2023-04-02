@@ -87,11 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getBurntCals();
   }
 
   @override
   Widget build(BuildContext context) {
+    getBurntCals();
     int todaysCals = context
         .watch<Providers>()
         .getUser
