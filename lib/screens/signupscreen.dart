@@ -6,6 +6,8 @@ import 'package:calori_fit/resources/providers.dart';
 import 'package:calori_fit/screens/genderscreen.dart';
 import 'package:calori_fit/screens/loginscreen.dart';
 import 'package:calori_fit/styles/Styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -112,6 +114,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if(checkError()){return;}
     AuthMethods amo = AuthMethods();
     String result = await amo.registerUser(
+        authInstance: FirebaseAuth.instance,
+        fireStore: FirebaseFirestore.instance,
         email: _emailController.text,
         name: _nameController.text,
         password: _passwordController.text,

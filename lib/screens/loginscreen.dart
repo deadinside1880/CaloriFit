@@ -6,6 +6,7 @@ import 'package:calori_fit/screens/home.dart';
 import 'package:calori_fit/screens/signupscreen.dart';
 import 'package:calori_fit/styles/Colors.dart';
 import 'package:calori_fit/styles/Styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../resources/providers.dart';
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() async {
     AuthMethods amo = AuthMethods();
     String res = await amo.signInUser(
-        email: _emailController.text, password: _passwordController.text);
+        email: _emailController.text, password: _passwordController.text, authInstance: FirebaseAuth.instance);
     if (res == 'success' && context.mounted) {
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
         builder: (context) => const Home()), 

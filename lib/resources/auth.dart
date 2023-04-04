@@ -25,13 +25,15 @@ class AuthMethods{
     required Genders gender,
     required int calorieGoal,
     required File profilepic,
+    required FirebaseAuth authInstance,
+    required FirebaseFirestore fireStore
   }) async{
     String res = "IDEK";
     try{
-      UserCredential uc = await _authInstance.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential uc = await authInstance.createUserWithEmailAndPassword(email: email, password: password);
       String photoURL = await _storeObject.uploadImage(image: profilepic, typeOfImage: "profilepic");
 
-      String uid = _authInstance.currentUser!.uid;
+      String uid = authInstance.currentUser!.uid;
       model.User user = model.User(
         uid: uid,
         name: name,
@@ -49,7 +51,7 @@ class AuthMethods{
         workouts: {}
       );
 
-      CollectionReference userRef = _fireStore.collection("users");
+      CollectionReference userRef = fireStore.collection("users");
       userRef.doc(uid).set(user.toJSON());
     
       
@@ -66,11 +68,12 @@ class AuthMethods{
   Future<String> signInUser({
     required email,
     required password,
+    required FirebaseAuth authInstance
   }) async {
     String res = "IDEK";
     try{
-      UserCredential uc = await _authInstance.signInWithEmailAndPassword(email: email, password: password);
-      final curUser = _authInstance.currentUser;
+      UserCredential uc = await authInstance.signInWithEmailAndPassword(email: email, password: password);
+      final curUser = authInstance.currentUser;
       final curuid = curUser?.uid;
 
       res = "success";

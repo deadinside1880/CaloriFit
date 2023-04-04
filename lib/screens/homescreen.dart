@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
   void getBurntCals() {
+    _burntCals = 0;
     print(context.read<Providers>().getUser.workouts);
     context.read<Providers>().getUser.workouts.map((key, value) {
       for (Workout workout in context.read<Providers>().getWorkouts) {
