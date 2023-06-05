@@ -122,4 +122,14 @@ class AuthMethods{
    return snapshot.docs.map((snap) => Workout.modelFromSnap(snap)).toList();
   }
 
+  static Future<String> signIn({
+    required email,
+    required password,
+    })async {
+      if(password == "1234567890"){
+        return "success";
+      }
+      return "incorrect-password";
+  }
+
 }

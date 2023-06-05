@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:calori_fit/models/enums.dart';
 import 'package:calori_fit/resources/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,8 +14,42 @@ void main() {
   //Testing user Sing up
   group('Create a user account', () {
     
-    test('', () {
+    test('Test normal account creation', () async {
+      AuthMethods amo = AuthMethods();
+      String res = await amo.registerUser(
+        email: "someone@gmail.com", 
+        password: "1NV!CTUS", 
+        name: "Someone Anyone", 
+        age: 32, 
+        weight: 67, 
+        height: 169, 
+        gender: Genders.MALE, 
+        calorieGoal: 3000, 
+        profilepic: File('../assets/image.jpeg'), 
+        authInstance: FirebaseAuth.instance, 
+        fireStore: FirebaseFirestore.instance
+      );
 
+      expect(res, 'success');
+    });
+
+     test('Test invalid password (less than 6 characters) account creation', () async {
+      AuthMethods amo = AuthMethods();
+      String res = await amo.registerUser(
+        email: "someone@gmail.com", 
+        password: "pw<6", 
+        name: "Someone Anyone", 
+        age: 32, 
+        weight: 67, 
+        height: 169, 
+        gender: Genders.MALE, 
+        calorieGoal: 3000, 
+        profilepic: File('../assets/image.jpeg'), 
+        authInstance: FirebaseAuth.instance, 
+        fireStore: FirebaseFirestore.instance
+      );
+
+      expect(res, 'weak-password');
     });
 
   });
@@ -20,12 +58,13 @@ void main() {
   //Testing User Sign in
   group('Sign in User', () {
     test('Test with normal data', () async{
-      WidgetsFlutterBinding.ensureInitialized();
-      await Firebase.initializeApp();
-      final auth = FirebaseAuth.instance;
-      AuthMethods amo = AuthMethods();
-      String res = await amo.signInUser(email: "ron@gmail.com", password: "1234567890", authInstance: FirebaseAuth.instance);
+      String res = await AuthMethods.signIn(email: "ron@gmail.com", password: "1234567890");
       expect(res,"success");
+    });
+
+    test('Test with wrong data', () async{
+      String res = await AuthMethods.signIn(email: "ron@gmail.com", password: "afgrgsdv");
+      expect(res,"incorrect-password");
     });
 
   });
@@ -46,10 +85,10 @@ void main() {
     });
   });
 
-  //Testing Receiving user details
+  //Testing Updating user details
   group('Update user details', () {
     
-    test('', () {
+    test('Test with normal User Data', () {
 
     });
   });
